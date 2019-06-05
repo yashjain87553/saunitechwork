@@ -1,0 +1,35 @@
+<form action="<?php echo $block->getadminurl() ?>/pwwcatproductadd/catproductadd/uploads" method="post" enctype="multipart/form-data">
+	 <input name="form_key" type="hidden" value="<?php echo $block->getFormKey() ?>">
+    <input type="file" name="fileToUpload" id="fileToUpload" accept=".csv" >
+    <div class="custom-select">
+     <select name="file_type"> 
+  <option value="121">New Arrivals</option>
+  <option value="122">Best Seller</option>
+  <option value="123">Editors Pick</option>
+  <option value="124">Sale</option>
+  <option value="8">Daily Deals</option>
+</select>
+</div> 
+    <input type="submit" value="Upload" name="submit" class="c_m_submit">
+</form>
+<br>
+<br>
+
+<form action="<?php echo $block->getadminurl() ?>/pwwcatproductadd/catproductadd/download" method="post">
+   <input name="form_key" type="hidden" value="<?php echo $block->getFormKey() ?>">
+    <input type="submit" value="Download Sample File" name="submit" class="sample download">
+</form>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Pww_Catproductadd/js/catproductadd":{}
+        }
+    }        
+</script>
+<script type="text/javascript">
+    require(['jquery'], function($) {
+      $("#fileToUpload").click(function(){
+         $('.message').hide();
+      });
+      });
+    </script>

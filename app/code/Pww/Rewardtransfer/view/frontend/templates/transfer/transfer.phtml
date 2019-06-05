@@ -1,0 +1,83 @@
+<?php
+ $base_url=$block->getBaseUrl();
+$balanceamount=$block->getBalancepoint(); ?>
+<h4 class="error_message" style="color:red"></h4>
+<h4 class="success_message" style="color:green"></h4>
+<h3>Balance : <?php echo "<span class='balance_point'>".$balanceamount."</span>";?> Points</h1>
+<div class="pointtransfer">
+E-mail: <input type="text" name="email"><br>
+<br>
+<br>
+Point To Transfer : <input type="text" name="points"><br>
+<br>
+<br>
+</div>
+<button type="button" class="btn btn-default" id="Transfer">Transfer</button>
+
+<script type="text/javascript">
+  require(['jquery', 'jquery/ui'], function($){ 
+      $( document ).ready(function() {
+             $(".error_message").text("");
+             $(".success_message").text("");
+      	    var balanceamount = '<?php echo $balanceamount; ?>';
+      	    var base_url = '<?php echo $base_url; ?>';
+            $("#Transfer").click(function(){
+               $(".error_message").text("");
+             $(".success_message").text("");
+            var ct_email = $('.pointtransfer').find('input[name="email"]').val();
+            var points = $('.pointtransfer').find('input[name="points"]').val();
+            if(ct_email==""|| points=="")
+            {
+              $(".error_message").text("Both input values must be required");
+              return ;
+            }
+
+            points = Number(points);
+            
+            balanceamount = Number(balanceamount);
+            if(points<=0 || isNaN(points))
+            {
+              $(".error_message").text("Points To Transfer Must Be A Possitive Number");
+              return ;
+            }
+            if(points>balanceamount)
+            {
+              $(".error_message").text("Can Not transfer more than "+ balanceamount +" points");
+              return ;
+            }
+            if (!confirm('Are you sure to transer reward points?')) {
+                        return;
+              }
+              else{
+             $.ajax({
+                url : base_url+'rewardtransfer/transfer/transfer',
+                type : 'POST',
+                dataType: 'json',
+                data: {
+                    ct_email:ct_email,
+                    points:points,
+
+                },
+                success : function(data) {       
+                    if(data['status']==false){
+                      $(".error_message").text(data['message']);
+                    }
+                    else{
+                      $(".success_message").text(data['message']);
+                      $(".balance_point").text(data['balance']);
+                      $('input[name="email"]').val('');
+                      $('input[name="points"]').val('');
+                    }
+           
+                },
+                error : function(request,error)
+                {
+                    alert("Error");
+                }
+            });
+           }
+           
+});
+      });
+    });
+    </script>

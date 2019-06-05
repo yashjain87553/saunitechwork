@@ -1,0 +1,309 @@
+<?php
+/** @var  $block \Magenest\GiftRegistry\Block\Guest\View */
+// @codingStandardsIgnoreFile
+$registry = $block->getGiftRegistry();
+$items = $block->getGiftRegistryItem();
+$link = $block->getViewFileUrl('/');
+$pass = $block->getPassword();
+$isCheckCustomer = $block->checkCustomer();
+$privacy = $registry->getPrivacy();
+$registrant = $block->getRegistrant();
+?>
+<style>
+    .modal-popup {
+        background: rgba(0, 0, 0, 0.45);
+    }
+
+    .message-error {
+        color: red;
+        display: none
+    }
+
+</style>
+<!--Popup checkpass-->
+<?php if ($pass != NULL && $isCheckCustomer && $privacy=="private") {
+    ?>
+    <input type="hidden" id="password-temp" value="<?php echo $pass ?>">
+    <aside class="modal-popup prompt _show" data-role="modal" data-type="popup" tabindex="0" style="z-index: 900;">
+        <div data-role="focusable-start" tabindex="0"></div>
+        <div class="modal-inner-wrap" style="border-radius: 15px;" data-role="focusable-scope">
+            <header class="modal-header">
+                <h1 class="modal-title" data-role="title"><?php echo __('Please enter password to show gift') ?></h1>
+            </header>
+            <div class="modal-content" data-role="content">
+                <label for="prompt-field">
+                    <div><?php echo __('Password') ?></div>
+                </label>
+                <div class="prompt-message">
+                    <input data-role="promptField" id="prompt-field" class="admin__control-text" type="password">
+                    <div class="message-error"><?php echo __('Password not correct!') ?></div>
+                </div>
+            </div>
+            <footer class="modal-footer">
+                <button class="action-primary action-accept" type="button" data-role="action">
+                    <span><?php echo __('OK') ?></span></button>
+            </footer>
+        </div>
+    </aside>
+<?php } ?>
+<!--end popub checkpass-->
+<!--Popup login-->
+<div id="popupLogin" class="modal-address">
+    <!-- Modal content -->
+    <div class="modal-content-address">
+        <span class="close">&times;</span>
+        <a href="<?php echo $block->getLoginUrl() ?>">
+            <?php echo __('You must log in first!') ?>
+        </a>
+    </div>
+</div>
+<!--end pop up login-->
+<!--Popup add address-->
+<div id="popupAddress" class="modal-address">
+    <!-- Modal content -->
+    <div class="modal-content-address">
+        <span class="close">&times;</span>
+        <a href="<?php echo $block->getEditAddress() ?>">
+            <?php echo __('You must add an address first!') ?>
+        </a>
+    </div>
+</div>
+<!--end popup-->
+<!--Popup max qty-->
+<div id="popupQty" class="modal-address">
+    <!-- Modal content -->
+    <div class="modal-content-address">
+        <span class="close">&times;</span>
+        <?php echo __('We don\'t have enough product stock as you requested!') ?>
+        </a>
+    </div>
+</div>
+<div id="popupQtyMin" class="modal-address">
+    <!-- Modal content -->
+    <div class="modal-content-address">
+        <span class="close">&times;</span>
+        <?php echo __('Please enter a number greater than or equal to 1 in Qty field!') ?>
+        </a>
+    </div>
+</div>
+<!--End popup max qty-->
+<div class="show-event">
+    <div class="giftcart-slide">
+        <div class="box-container">
+            <div class="owl-giftcart">
+                <?php if ($registry->getData('image') != ''): ?>
+                    <a href="#"><img
+                                src="<?php echo $block->getMediaUrl() . 'magenest/giftregistry/type/image' . $registry->getData('image') ?>"></a>
+                <?php else: ?>
+                    <?php if ($block->getMediaImage() === null): ?>
+                        <?php $type = $block->getType(); ?>
+                        <?php if ($type == 'babygift'): ?>
+                            <a href="#"><img
+                                        src="<?php echo $link . '/Magenest_GiftRegistry/images/guest-view/guestbaby.jpg' ?>"></a>
+                        <?php elseif ($type == 'weddinggift'): ?>
+                            <a href="#"><img
+                                        src="<?php echo $link . '/Magenest_GiftRegistry/images/guest-view/guestwedding.jpg' ?>"></a>
+                        <?php elseif ($type == 'christmasgift'): ?>
+                            <a href="#"><img
+                                        src="<?php echo $link . '/Magenest_GiftRegistry/images/guest-view/guestchismas.jpeg' ?>"></a>
+                        <?php elseif ($type == 'birthdaygift'): ?>
+                            <a href="#"><img
+                                        src="<?php echo $link . '/Magenest_GiftRegistry/images/guest-view/guestbirthday.jpg' ?>"></a>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <a href="#"><img src="<?php echo $block->getMediaImage() ?>"></a>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+    <div class="giftcart-list">
+        <div class="box-container">
+            <div class="block-title">
+                <h3 class="title"><?php echo html_entity_decode($registry->getData('title'), ENT_QUOTES); ?></h3>
+                <span class="line"></span>
+                <span><?php echo html_entity_decode($registry->getData('description'), ENT_QUOTES); ?></span>
+            </div>
+            <?php
+
+            if ($items->getSize() > 0) {
+                ?>
+                <table id="registry-list">
+                    <colgroup>
+                        <col width="30%">
+                        <col width="70%">
+                    </colgroup>
+                    <tbody>
+                    <?php foreach ($items as $item) {
+                        try{
+                            $product = $item->getProduct();
+                        }
+                        catch (Exception $e){
+                            continue;
+                        }
+                        if(!$block->getStockItem($item,$product)){
+                            continue;
+                        }
+                        $would_love_qty = $item->getData('qty') - $item->getData('received_qty');
+                        $options = [];
+
+//                        if ($product->getOptions()) {
+//                            $options = $block->getItemOptions($item);
+//                            $productCustom = $block->getProductByOption($options, $product->getName(), $item->getData('gift_item_id'));
+//                        }
+                        ?>
+                        <tr>
+                            <td>
+                                <img style="width: 50%;margin: auto;" src="<?php echo $block->getImageProduct($product,$item); ?>">
+                                <?php echo $item->getData('event_id') ?>
+                            </td>
+                            <td>
+
+                                <a class="name"
+                                   href="<?php echo $product->getUrlModel()->getUrl($product) ?>">  <?php echo $product->getName() ?></a>
+                                <dl>
+                                <?php if ($product->getTypeId() == 'configurable'): ?>
+                                    <?php foreach ($block->getItemOptions($item) as $op): ?>
+                                        <?php if (is_array($op) && !empty($op)): ?>
+                                                <dd><?php echo '<b>'.$op['label']."</b>: ".$op['value'] ?></dd>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                                </dl>
+
+                                <?php if ($product->getOptions()):$customOption = $block->getCustomizableOption($item) ?>
+                                    <?php foreach ($customOption as $custom) : ?>
+                                        <dl>
+                                            <dd><?php echo '<b>'.$custom['label']."</b>: ".$custom['value'] ?></dd>
+                                        </dl>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+
+                                <div class="qty-info">
+                                    <label class="priority"><?php echo $block->getPriority($item->getData('priority')); ?></label>
+                                    <span class="would-love-qty"> <b><?php if ($would_love_qty <= 0) {
+                                                echo 0;
+                                            } else {
+                                                echo $would_love_qty;
+                                            } ?></b></span>
+
+                                </div>
+                                <div class="qty-info">
+                                    <span class="price-gift-item">
+                                        <?php $price = $block->getPrice($item,$product);?>
+                                        <?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($price, true, false); ?>
+                                    </span>
+                                </div>
+                                <div class="note-info">
+                                    <?php if ($item->getData('note') != ''): ?>
+                                        <span class="note"><?php echo htmlspecialchars('Note:' . $item->getData('note'), ENT_QUOTES, 'UTF-8'); ?></span>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="add-to-cart-box">
+                                    <div class="add-to-cart btn" name="add-to-cart"
+                                         data-qty-max="<?php echo $block->getStockItem($item, $product) ?>"
+                                         data-role="add-to-cart" data-item="<?php echo $item->getId() ?>"
+                                         data-hasaddress="<?php echo $block->hasAddress() ?>"><?php echo __('Add To Cart') ?></div>
+<!--                                --><?php //if (!$isCheckCustomer) :?>
+                                    <input class="qty" placeholder="Qty" type="text" value="1" name="qty" min="1" data-validate="{required:true,'validate-number':true, 'integer':true}"/>
+<!--                                --><?php //endif;?>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                    </tbody>
+                </table>
+                <?php
+            }
+            ?>
+        </div>
+    </div>
+    <div class="gift-time">
+        <div class="box-container">
+            <div class="block-title">
+                <h3 class="title"><?php echo _('JOIN US') ?></h3>
+                <span class="line"></span>
+                <p><?php echo __('We hope that this registry will help you to select the gifts we love') ?></p>
+            </div>
+            <div class="clearfix">
+                <div class="map">
+                    <span class="title"><?php echo __('When') ?>? <?php echo __('and Where') ?>?</span>
+                    <p><span class="icon-location"></span><?php echo $registry->getData('location') ?></p>
+                    <p><span class="icon-clock"></span><?php echo $registry->getData('date') ?></p>
+                    <p><span class="icon-mail"></span><?php echo $registrant->getData('email') ?></p>
+                </div>
+                <div class="time-remaining">
+                    <span class="title"><?php echo __('Time Remaining') ?></span>
+                    <div class="countdown-gift" id="countdown-gift">
+                    </div>
+                </div>
+            </div>
+            <div class="box-map">
+                <iframe width="1195" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                        src="https://www.google.co.uk/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=<?php echo $registry->getData('location'); ?>&amp;aq=&amp;sspn=0.111915,0.295601&amp;ie=UTF8&amp;hq=&amp;hnear=<?php echo "Your variables"; ?>&amp;t=m&amp;z=12&amp;output=embed"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    require([
+        'jquery',
+        'Magenest_GiftRegistry/js/addToCart',
+        'Magenest_GiftRegistry/js/jquery.plugin',
+        'Magenest_GiftRegistry/js/jquery.countdown',
+        'Magento_Ui/js/modal/prompt'
+    ], function ($, addToCart) {
+        'use strict';
+        $(document).ready(function () {
+            addToCart({
+                //cartUrl: '<?php //echo $block->getUrl('checkout/cart/index') ?>//',
+                cartUrl: '<?= $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]) ?>',
+                addUrl: '<?php echo $block->addToCart() ?>',
+                formKey: '<?php echo $block->getFormKey()  ?>'
+            });
+            var austDay = new Date();
+            /*austDay = new Date(austDay.getFullYear() + 1, 1 - 1, 10);*/
+            austDay = new Date(<?php echo (int)substr($registry->getData('date'), 0, 4) ?>, <?php echo (int)substr($registry->getData('date'), 5, 2) ?>-1, <?php echo (int)substr($registry->getData('date'), 8, 2)+1 ?>);
+            if ($.isFunction($.fn.countdown)) {
+                $('#countdown-gift').countdown({until: austDay});
+            }
+
+            $('#year').text(austDay.getFullYear());
+
+            var pass2 = $("#password-temp").val();
+            if (pass2 != '') {
+                $('button[data-role="action"]').click(function () {
+                    var pass1 = $("#prompt-field").val();
+                    $.ajax({
+                        type: "POST",
+                        url: "<?php echo $block->getUrl('giftregistrys/index/checkpass')?>?isAjax=true",
+                        data: {
+                            pass1: pass1,
+                            pass2: pass2
+                        },
+                        showLoader: true
+                    }).done(function (response) {
+                        if (response['check'] == true) {
+                            $("aside").fadeOut(350);
+                            $("#registry-list").show();
+                        } else {
+                            $(".message-error").show();
+                        }
+                    });
+                })
+            } else {
+
+            }
+        });
+    });
+</script>
+<!--Add popub checkpasss-->
+<script>
+    require([
+        'jquery',
+    ], function ($, prompt) { // Variable that represents the `prompt` function
+
+    });
+</script>

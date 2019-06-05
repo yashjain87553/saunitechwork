@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="\Magenest\GiftRegistry\Controller\GiftRegistryProviderInterface" type="\Magenest\GiftRegistry\Controller\GiftRegistryProvider" />
+    <type name="Magento\Theme\Block\Html\Topmenu">
+        <plugin name="magenest-giftregistry-topmenu" type="Magenest\GiftRegistry\Plugin\Block\TopMenu" />
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="registry_listing_data_source" xsi:type="string">Magenest\GiftRegistry\Model\ResourceModel\Registrant\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Magenest\GiftRegistry\Model\ResourceModel\Registrant\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult" >
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magenest_giftregistry_registrant</argument>
+            <argument name="resourceModel" xsi:type="string">Magenest\GiftRegistry\Model\ResourceModel\Registrant</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="type_listing_data_source" xsi:type="string">Magenest\GiftRegistry\Model\ResourceModel\Type\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Magenest\GiftRegistry\Model\ResourceModel\Type\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult" >
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magenest_giftregistry_event_type</argument>
+            <argument name="resourceModel" xsi:type="string">Magenest\GiftRegistry\Model\ResourceModel\Type</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="transaction_listing_data_source" xsi:type="string">Magenest\GiftRegistry\Model\ResourceModel\Tran\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Magenest\GiftRegistry\Model\ResourceModel\Tran\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult" >
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magenest_giftregistry_order</argument>
+            <argument name="resourceModel" xsi:type="string">Magenest\GiftRegistry\Model\ResourceModel\Tran</argument>
+        </arguments>
+    </virtualType>
+</config>

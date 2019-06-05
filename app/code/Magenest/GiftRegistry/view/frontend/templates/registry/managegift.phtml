@@ -1,0 +1,1329 @@
+<?php
+
+/** @var $block \Magenest\GiftRegistry\Block\Registry\ManageRegistry */
+// @codingStandardsIgnoreFile
+$eventType = $block->getEventType();
+$registry = $block->getRegistry();
+?>
+<input name="event_id" id="event_id" value="<?php echo $registry->getData('gift_id') ?>" hidden/>
+<?php
+$link = $block->getViewFileUrl('/');
+$items = $block->getItemList();
+$registry = $block->getRegistry();
+$options = json_decode($registry->getData('gift_options'), true);
+$dateTimeObj = new \DateTime($registry->getData('date'));
+$usDateFormat = $dateTimeObj->format('m-d-Y');
+$registrants = $block->getRegistrants();
+$addressCollection = $block->getShippingAddress();
+$addressArr = $block->getCustomerAddress();
+$baseUrl = $block->getBaseUrlEvent();
+$url = $block->getLinkShare();
+if (!$url) {
+    return;
+}
+$not_encode_url = $url;
+$url = urlencode($url);
+$title = urlencode($block->getGiftTitle());
+$replace = array('{wishlist_url}' => $not_encode_url);
+$content = strtr($block->getDescription(), $replace);
+$twitter_summary = $content;
+$summary = urlencode($content);
+$imageurl = urlencode('giftregistry_share_image_url');
+
+$facebook_share_link = "https://www.facebook.com/sharer.php?s=100&amp;p[title]=".$title."&amp;p[url]=".$url."&amp;p[summary]=".$summary."&amp;p[images][0]=".$imageurl;
+$twitter_share_link = "https://twitter.com/share?url=" . $url . "&amp;text=" . $twitter_summary;
+$google_share_link = "https://plus.google.com/share?url=" . $url . '&amp;title=' . $title;
+if ($block->haveOrder() != 0) {
+    $orderCollection = $block->getOrderCollection();
+}
+?>
+<div class="my_message">
+</div>
+<div class="col-left">
+    <div class="registry-task-bar">
+        <div class="option-title">
+            <div class="home" id="home" onclick="window.location.reload()">
+                <h3>
+                    <?php
+                    switch ($registry->getData('type')) {
+                        case 'babygift':
+                            echo __('Manage Baby Registry');
+                            break;
+                        case 'birthdaygift':
+                            echo __('Manage Birthday Registry');
+                            break;
+                        case 'christmasgift':
+                            echo __('Manage Christmas Registry');
+                            break;
+                        default:
+                            echo __('Manage Wedding Registry');
+                            break;
+                    }
+                    ?>
+                </h3>
+            </div>
+            <h4>
+                <?php
+                switch ($registry->getData('type')) {
+                    case 'babygift':
+                        echo $registry->getData('title');
+                        break;
+                    case 'birthdaygift':
+                        echo $options['name-birthday'];
+                        break;
+                    case 'christmasgift':
+                        echo '';
+                        break;
+                    default:
+                        echo "<span>" . $options['husband_name'] . "</span><i style='color: deeppink;font-size: 20px;margin: 0px 5px 2px'>&#10084;&#10084;</i><span>" . $options['wife_name'] . "</span>";
+                        break;
+                }
+                ?>
+            </h4>
+        </div>
+        <div>
+            <img style="display: inline-block"
+                 src="<?php echo $link . '/Magenest_GiftRegistry/images/manage-gift/' . $block->getImageAvatarbyType($registry->getData('type')) ?>">
+        </div>
+        <div class="baby-options">
+            <h3>
+                <?php
+                switch ($registry->getData('type')) {
+                    case 'babygift':
+                        echo $options['baby_name'];
+                        break;
+                    case 'birthdaygift':
+                        echo '';
+                        break;
+                    case 'christmasgift':
+                        echo '';
+                        break;
+                    default:
+                        echo '';
+                        break;
+                }
+                ?>
+            </h3>
+        </div>
+        <div class="manage-options">
+            <div id="edit-information" class="each-option"
+                 style="box-shadow: -5px 0px 0px 0px black; background-color:#F3793B; color:#FFF;">
+                <h3><?php echo __('Edit Information') ?></h3>
+            </div>
+            <div id="list-item" class="each-option">
+                <h3><?php echo __('Items') ?></h3>
+            </div>
+            <div id="list-order" class="each-option">
+                <h3><?php echo __('Orders') ?></h3>
+            </div>
+            <?php if(!$block->getIsExpiredGift()): ?>
+            <div id="share-registry" class="each-option">
+                <h3><?php echo __('Share To My Friends') ?></h3>
+            </div>
+            <div id="list-share" hidden>
+                <ul class="list-share">
+                    <li class="list-share-li"><a target="_blank" class="facebook"
+                                                 href="<?php echo $facebook_share_link ?>"> <img
+                                            src="<?php echo $link . '/Magenest_GiftRegistry/images/icon/facebook2.png' ?>"></a>
+                    </li>
+
+                    <li class="list-share-li"><a target="_blank" class="twitter"
+                                                 href="<?php echo $twitter_share_link ?>"> <img
+                                    src="<?php echo $link . '/Magenest_GiftRegistry/images/icon/twitter2.png' ?>"></a>
+                    </li>
+
+                    <!-- google doesn't support since 02/04/2019 -->
+<!--                    <li class="list-share-li"><a target="_blank" class="googleplus"-->
+<!--                                                 href="--><?php //echo $google_share_link ?><!--"-->
+<!--                                                 onclick='javascript:window.open(this.href, "", "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600");return false;'><img-->
+<!--                                    src="--><?php //echo $link . '/Magenest_GiftRegistry/images/icon/google_plus2.png' ?><!--"></a>-->
+<!--                    </li>-->
+
+                    <li class="list-share-li"><a id="share-email" class="email" href="#"><img
+                                    src="<?php echo $link . '/Magenest_GiftRegistry/images/icon/email2.png' ?>"></a>
+                    </li>
+                    <li class="list-share-li"><span id="url-share" class="email" ><i id="i-url-share" class="fa fa-link"></i></span>
+                    </li>
+                </ul>
+            </div>
+            <div id="guest-view" class="each-option">
+                <h3><?php echo __('Style and Preview') ?></h3>
+            </div>
+            <?php endif ?>
+        </div>
+    </div>
+</div>
+<div class="col-right">
+    <!--    Table List Items-->
+    <img src="<?php echo $link . '/Magenest_GiftRegistry/images/manage-gift/' . $block->getImagebyType($registry->getData('type')) ?>"
+         style="height: 200px">
+    <div class="list-item-container" id="list-container" hidden>
+        <div style="margin-top: 5px">
+            <input id="btnUpdate" style="margin-top: -5px;" class="action primary" type="button"
+                   value="<?php echo __('Update') ?>"/>
+            <input id="btnDellAll" style="margin-top: -5px;" class="action primary" type="button"
+                   value="<?php echo __('Delete') ?>"
+                   post-url="<?php echo $block->getUrl('giftregistrys/customer/item/') ?>"
+                   idGift="<?php echo $block->getRegistryId() ?>"/>
+            <input id="btnAddItems" style="margin-top: -5px;" class="action primary" type="button"
+                   value="<?php echo __('Add Items') ?>"
+                   post-url="<?php echo $block->getUrl('') ?>"/>
+        </div>
+        <div class="message-notice notice message" data-ui-id="message-notice">
+            <span><?php echo __("To add Items to your registry, please go to any of our products and choose 'ADD TO GIFT REGISTRY'") ?></span>
+        </div>
+        <form id="list_item_form" method="POST" data-mage-init='{"validation": {}}' action="<?php echo $block->getUpdateActionUrl() ?>">
+            <input name="event_id" value="<?php echo $registry->getData('gift_id') ?>" hidden/>
+            <input name="event_type" value="<?php echo $registry->getData('type') ?>" hidden/>
+            <table class="data-grid" id="list-item" align-content="center">
+                <tr>
+                    <th id="select-option" class="data-grid-th">
+                        <select id="select-delete">
+                            <option value="1"><?php echo __('Select All') ?></option>
+                            <option value="2" selected id="unselect"><?php echo __('Unselect All') ?></option>
+                        </select>
+                    </th>
+                    <th class="data-grid-th"><span><?php echo __('Image') ?></span></th>
+                    <th class="data-grid-th"><span><?php echo __('Product Name') ?></span></th>
+                    <th class="data-grid-th"><span><?php echo __('Unit Price') ?></span></th>
+                    <th class="data-grid-th"><span><?php echo __('Details') ?></span></th>
+                    <th class="data-grid-th"><span><?php echo __('Would Love') ?></span></th>
+                    <th class="data-grid-th"><span><?php echo __('Purchased') ?></span></th>
+                </tr>
+                <?php if (count($items) == 0): ?>
+                    <tr class="data-grid-tr-no-data">
+                        <td class="empty-text" colspan="8"><?php echo __('We couldn\'t find any records.') ?></td>
+                    </tr>
+                <?php else: ?>
+                    <?php foreach ($items as $item): ?>
+                        <?php
+                        try{
+                            $product = $item->getProduct();
+                        }
+                        catch (Exception $e){
+                            continue;
+                        }
+                        if(!$block->getPrice($item,$product)){
+                            continue;
+                        }
+                        $received_qty = $item->getData('received_qty');
+                        if (!$received_qty) $received_qty = 0; ?>
+                        <tr>
+                            <td class="col-title" style="width: 30px">
+                                <input class="checkdelete"
+                                       type="checkbox"
+                                       value="<?php echo $item->getId() ?>"
+                                       idRegistry="<?php echo $block->getRegistryId() ?>">
+                            </td>
+                            <td data-th="<?php echo $block->escapeHtml(__('Image')) ?>" class="col-title">
+                                <img style="width: 50%;margin: auto;" src="<?php echo $block->getImageProduct($product,$item); ?>">
+                                <?php echo $item->getData('event_id') ?>
+                            </td>
+
+                            <td data-th="<?php echo $block->escapeHtml(__('Product Name')) ?>" class="col-title">
+                                <a href="<?php echo $product->getUrlModel()->getUrl($product) ?>">  <?php echo $product->getData('name') ?></a>
+                                <div class="field">
+                                    <dl>
+                                    <?php if ($product->getTypeId() == 'configurable'): ?>
+                                        <?php foreach ($block->getItemOptions($item) as $op ): ?>
+                                            <?php if (is_array($op) && !empty($op)): ?>
+
+                                                    <dd><?php echo '<b>'.$op['label']."</b>: ".$op['value'] ?></dd>
+
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                    <?php if ($product->getOptions()):$customOption = $block->getCustomizableOption($item) ?>
+                                        <?php foreach ($customOption as $custom) : ?>
+                                            <dl>
+                                                <dd><?php echo '<b>'.@$custom['label']."</b>: ".@$custom['value'] ?></dd>
+                                            </dl>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                    </dl>
+                                </div>
+                            </td>
+
+                            <td data-th="<?php echo $block->escapeHtml(__('Unit Price')) ?>" class="col-title">
+                                <?php $price = $block->getPrice($item,$product);?>
+                                <?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($price, true, false);
+                                ?>
+                            </td>
+
+                            <td class="col-title">
+                                <div class="field">
+                                    <label class="label"><?php echo __('Priority') ?></label>
+                                    <select class="type" name="item[<?php echo $item->getId() ?>][priority]"
+                                            data-role="adjust-select"
+                                            data-myvalue="<?php echo $item->getData('priority') ?>">
+                                        <option value="0"><?php echo __('Like to have') ?></option>
+                                        <option value="1"><?php echo __('Love to have') ?></option>
+                                        <option value="2"><?php echo __('Must have') ?></option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label class="label"><?php echo __('Note') ?></label>
+                                    <textarea class="note"
+                                              name="item[<?php echo $item->getId() ?>][note]"><?php echo htmlspecialchars($item->getData('note'), ENT_QUOTES, 'UTF-8'); ?></textarea>
+                                </div>
+                            </td>
+                            <td data-th="<?php echo $block->escapeHtml(__('Would Love')) ?>" class="col-title">
+                                <input class="qty" name="item[<?php echo $item->getId() ?>][qty]"  min="1" data-validate="{required:true,'validate-greater-than-zero':true, 'integer': true}"
+                                       value="<?php echo $item->getData('qty') ?>" type="text">
+                            </td>
+                            <td data-th="<?php echo $block->escapeHtml(__('Purchased')) ?>" class="col-title">
+                                <?php echo $received_qty ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </table>
+        </form>
+    </div>
+    <div id="confirmDelete" class="confirmDelete">
+        <div class="confirmDelete-content">
+            <div style="text-align: center">
+                <h3><?php echo __('Your item will be deleted! Are you sure?') ?></h3>
+                <input type="button" class="primary action" id="okDelete" value="<?php echo __('Yes') ?>">
+                <input type="button" class="primary action" id="noDelete" value="<?php echo __('No') ?>">
+            </div>
+        </div>
+    </div>
+    <div id="noItemDelete" class="noItemDelete">
+        <div class="confirmDelete-content">
+            <div style="text-align: center">
+                <h3><?php echo __(' Attention! You haven\'t selected any items!') ?></h3>
+                <input type="button" class="primary action" id="ok" value="<?php echo __('Ok') ?>">
+
+            </div>
+        </div>
+    </div>
+    <!--    End Table List Items-->
+    <!--    Edit Information-->
+    <div class="edit-infor-container" id="edit-container">
+        <div type="hidden" id="form-key" value="<?php echo $block->getFormKey(); ?>"></div>
+        <form method="POST" data-mage-init='{"validation": {}}' autocomplete="off" id="registry-infor-form"
+              action="<?php echo $block->getSaveAddressUrl() ?>">
+            <input type="text" name="type" value="<?php echo $block->getEventType() ?>" style="display: none">
+            <div class="col-edit-left">
+                <?php include($block->getTemplateFile('Magenest_GiftRegistry::registry/manage/' . $eventType . '.phtml'))
+                ?>
+                <fieldset class="fieldset">
+                    <h2 class="legend"><?php echo __('Registrant Information') ?></h2>
+                    <?php if ($registrants && $registrants->getSize() > 0): ?>
+                        <?php foreach ($registrants as $registrant) : ?>
+                            <div class="field required">
+                                <label for="firstName" class="required label"><?php echo __("First Name") ?></label>
+                                <div class="input-box">
+                                    <input type="text" data-validate="{required:true}" class="background-none"
+                                           value="<?php echo $registrant->getData('firstname') ?>"
+                                           name="registrant[<?php echo $registrant->getId() ?>][firstname]"
+                                           title="<?php echo __("First Name") ?>" id="firstName"
+                                           class="input-text required-entry">
+                                </div>
+                            </div>
+
+                            <div class="field required">
+                                <label for="lastname" class="required label"><?php echo __("Last name") ?> </label>
+                                <div class="input-box">
+                                    <input type="text" data-validate="{required:true}" class="background-none"
+                                           value="<?php echo $registrant->getData('lastname') ?>"
+                                           name="registrant[<?php echo $registrant->getId() ?>][lastname]"
+                                           title="<?php echo __("Last name") ?>" id="lastName"
+                                           class="input-text required-entry">
+                                </div>
+                            </div>
+
+                            <div class="field required">
+                                <label for="email" class="required label"><?php echo __("Email") ?> </label>
+                                <div class="input-box">
+                                    <input type="email" data-validate="{required:true}" class="background-none"
+                                           value="<?php echo $registrant->getData('email') ?>"
+                                           name="registrant[<?php echo $registrant->getId() ?>][email]" title="Email"
+                                           id="email" class="input-text required-entry">
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="field required">
+                            <label for="firstName" class="required label"><?php echo __("First Name") ?></label>
+                            <div class="input-box">
+                                <input type="text" data-validate="{required:true}" class="background-none"
+                                       name="registrant[0][firstname]" title="<?php echo __("First Name") ?>"
+                                       id="firstName" class="input-text required-entry">
+                            </div>
+                        </div>
+
+                        <div class="field required">
+                            <label for="lastname" class="required label"><?php echo __("Last name") ?> </label>
+                            <div class="input-box">
+                                <input type="text" data-validate="{required:true}" class="background-none"
+                                       name="registrant[0][lastname]" title="<?php echo __("Last name") ?>"
+                                       id="lastName" class="input-text required-entry">
+                            </div>
+                        </div>
+
+                        <div class="field required">
+                            <label for="email" class="required label"><?php echo __("Email") ?> </label>
+                            <div class="input-box">
+                                <input type="email" data-validate="{required:true, 'validate-email':true}"
+                                       name="registrant[0][email]" title="Email" id="email" class="input-text">
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </fieldset>
+                <?php if(!$block->getIsExpiredGift()): ?>
+                <div class="fieldset" style="text-align: center">
+                    <input id="save_btn" class="action btn_save primary" type="button" style="display: inline-block"
+                           value="Save Your Gift">
+                    <input type="button" style="display: inline-block; margin: 10px" value="Delete this gift"
+                           id="delete-registry" class="action btn_delete primary"
+                           data-giftid="<?php echo $registry->getData('gift_id') ?>"
+                           data-url="<?php echo $block->deleteEvent() ?>">
+                </div>
+                <?php endif ?>
+            </div>
+            <div class="col-edit-right">
+                <fieldset class="fieldset">
+                    <h2 class="legend"><?php echo __('General Information') ?></h2>
+
+                    <!-- STATUS -->
+                    <div class="field required">
+                        <label for="status" class="required label"><?php echo __("Status") ?></label>
+                        <div class="panel-body">
+                            <select id="status-select-input" name="is_expired" data-validate="{required:true}"
+                                    data-role="defined-selected" data-myvalue="<?=$registry->getData('is_expired')?>">
+                                <option value="1" <?php echo $registry->getData('is_expired') ? "selected" : "" ?> > <?php echo __("Expired") ?></option>
+                                <option value="0" <?php echo !$registry->getData('is_expired') ? "selected" : "" ?> > <?php echo __("Active") ?></option>
+                            </select>
+                        </div>
+                        <small>you can no longer edit this registry when expired</small>
+                    </div>
+
+                    <div class="field">
+                        <label for="title" class="required label"><?php echo __("Title") ?></label>
+                        <div class="input-box">
+                            <input type="text" id="title" class="background-none" name="title"
+                                   value="<?php echo $block->escapeHtml($registry->getData('title')); ?>"/>
+                        </div>
+                    </div>
+                    <div class="field required">
+                        <div class="panel-heading label"><?php echo __('Date ') ?></div>
+                        <div class="panel-body">
+                            <input name="date" id="date" class="background-none" data-role="date-picker" class="picker"
+                                   type="text" readonly value="<?php echo $usDateFormat ?>"/> <span
+                                    class="date-icon"></span>
+                        </div>
+                    </div>
+
+                    <!-- LOCATION -->
+
+                    <div class="field">
+                        <label for="location" class="required label"><?php echo __("Location") ?></label>
+                        <div class="input-box">
+                            <input type="text" id="pac-input" name="location" class="background-none"
+                                   value="<?php echo $registry->getData('location') ?>"/>
+                        </div>
+                        <div id="map-section">
+                            <div id="type-selector" class="pac-controls">
+                                <input type="radio" id="changetype-all" name="autocomplete_type" checked="checked">
+                                <label for="changetype-all">All</label>
+
+                                <input type="radio" id="changetype-establishment" name="autocomplete_type">
+                                <label for="changetype-establishment">Establishments</label>
+
+                                <input type="radio" id="changetype-address" name="autocomplete_type">
+                                <label for="changetype-address">Addresses</label>
+
+                                <input type="radio" id="changetype-geocode" name="autocomplete_type">
+                                <label for="changetype-geocode">Geocodes</label>
+                            </div>
+                            <div id="strict-bounds-selector" class="pac-controls">
+                                <input type="checkbox" id="use-strict-bounds" value="">
+                                <label for="use-strict-bounds">Strict Bounds</label>
+                            </div>
+                            <div id="map"></div>
+                            <div id="infowindow-content">
+                                <img src="" width="16" height="16" id="place-icon">
+                                <span id="place-name" class="title"></span><br>
+                                <span id="place-address"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="description" class="required label"><?php echo __("Description") ?></label>
+                        <div class="input-box">
+                            <textarea name="description"
+                                      id="description"><?php echo $registry->getData('description') ?></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- PRIVACY -->
+
+                <fieldset class="fieldset">
+                    <h2 class="legend"><?php echo __('Privacy') ?></h2>
+                    <div class="field required">
+                        <label for="password" class="label"><?php echo __('Privacy mode') ?></label>
+                        <div class="control">
+                            <select id="privacy-select-input" name="privacy" data-validate="{required:true}" data-role="defined-selected"
+                                    data-myvalue="<?php echo $registry->getData('privacy') ?>">
+                                <option value="private" <?php echo $registry->getData('privacy') == "private" ? "selected" : "" ?> > <?php echo __("Private") ?></option>
+                                <option value="public" <?php echo $registry->getData('privacy') == "public" ? "selected" : "" ?> > <?php echo __("Public") ?></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field required password-field" hidden>
+                        <label for="password" class="required label"><?php echo __("Password") ?></label>
+                        <input type="password" data-validate="{required:true, 'validate-password':true}" id="password"
+                               class="input-text" title="<?php echo __("Password") ?>" value="" name="password" readonly onfocus="this.removeAttribute('readonly');" placeholder="Enter new password">
+                    </div>
+                    <div class="field required password-field" hidden>
+                        <label for="re_password" class="required label"><?php echo __("Confirm Password") ?></label>
+                        <input type="password" data-validate="{required:true, equalTo:'#password'}" id="re_password"
+                               class="input-text" title="<?php echo __("Confirm Password") ?>" value="" name="re_password" readonly onfocus="this.removeAttribute('readonly');" placeholder="Confirm new password">
+                        <label style="color:red;" hidden id="check_password_label" class="label">
+                            <?php echo __('Password and repassword must match!') ?></label>
+                    </div>
+                    <div id="change-password-btn" class="field" <?php if ($registry->getData('privacy') == 'private') echo ''; else echo 'hidden' ?>>
+                        <div id="change_pass" class="change_pass action primary">
+                            <b><?php echo __('Change Password') ?></b></div>
+                    </div>
+
+                    <div class="field choice">
+                        <?php $checked = '';
+                        $show_in_search = $registry->getData('show_in_search');
+                        if ($show_in_search == 'on') $checked = 'checked'; ?>
+                        <input type="checkbox" <?php echo $checked ?> id="show_in_search_result" name="show_in_search"
+                               class="checkbox" title="<?php echo __("Show in search result") ?>">
+                        <input type="hidden" id="gift_id" name="gift_id" value="<?php echo $registry['gift_id'] ?>">
+
+                        <label class="label" for="show_in_search"><?php echo __("Show in search result") ?></label>
+                    </div>
+                </fieldset>
+
+                <fieldset class="fieldset">
+                    <h2 class="legend"><?php echo __("Shipping Address Information") ?></h2>
+                    <div class="field required">
+                        <label for="shipping_address"
+                               class="required label"><?php echo __("Shipping Address") ?> </label>
+                        <div class="control">
+                            <select id="shipping_address" data-validate="{'required-entry':true}"
+                                    name="shipping_address" data-role="defined-selected"
+                                    data-action="add-new-shipping-address" data-roles="shipping-add"
+                                    data-role="defined-selected"
+                                    data-myvalue="<?php echo $registry->getData('shipping_address') ?>">
+                                <option value=""><?php echo __('Select an address') ?></option>
+                                <?php if ($addressArr) : ?>
+                                    <?php foreach ($addressArr as $address) : ?>
+                                        <option <?php if ($address['id'] == $registry->getData('shipping_address')) echo "selected" ?>
+                                                value="<?php echo $address['id'] ?>"><?php echo $address['name'] ?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                                <option data-action="add-new-shipping-address"
+                                        value="new"><?php echo __("Add new address") ?></option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </div>
+    <!--    End Edit Information-->
+</div>
+<div class="col-right">
+    <!--    Share Registry-->
+    <div id="share-container" class="share-container" hidden>
+        <div type="hidden" id="form-key" value="<?php echo $block->getFormKey(); ?>"></div>
+        <div id="share_email_div">
+            <form method="POST" id="share_via_email_form" class="form email" action="">
+                <input type="hidden" name="giftregistry-share-email" value="1"/>
+                <div class="head_div">
+                    <label class="email_label" for="recipient"><?php echo __('Share via Email') ?></label>
+                </div>
+                <div class="form-field">
+                    <label class="email_label" for="recipient"><?php echo __('Recipient') ?></label>
+                    <input name="recipient" id="recipient" type="text"
+                           size="40">
+                    <span class="note"><?php echo __("Insert email addresses here! Email addresses are separated by comma ',' (not include space ' ')") ?></span>
+                    <label class="mage-error" id="email-validate-error" style="display: none; color:red;">
+                    </label>
+                </div>
+                <div class="form-field">
+                    <label class="email_label" for="email_subject"><?php echo __('Subject') ?></label>
+                    <input name="email_subject" id="email_subject" type="text"
+                           value="<?php echo $block->getDescription(); ?>"
+                           size="40">
+                </div>
+                <div class="form-field">
+                    <label class="email_label" for="message"><?php echo __('Message') ?></label>
+                    <textarea id="message" name="message" rows=""
+                              cols=""><?php echo 'Link Gift Registry: ' . $block->getLinkShare() ?> </textarea>
+                </div>
+                <div class="list_btn">
+                    <button id="form_email_submit_btn" type="button">
+                        <?php echo __('Submit') ?>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<input type="text" style="display: none" value="<?php echo $block->getListGiftUrl() ?>" id="list_gift_url">
+<!--    End Share Registry-->
+<div style="display: none">
+    <div data-role="wrapper-modal-new-email" class="create-new-marketing-email full-height">
+        <?php
+        echo $block->getChildHtml('giftregistry.address');
+        ?>
+    </div>
+</div>
+<div class="col-right">
+    <div id="list-order-container" class="list-order-container" hidden>
+        <table class="data-grid" id="list-order">
+            <tr>
+                <th class="data-grid-th"><span><?php echo __('No.') ?></span></th>
+                <th class="data-grid-th"><span><?php echo __('Item Name') ?></span></th>
+                <th class="data-grid-th"><span><?php echo __('Qty') ?></span></th>
+                <th class="data-grid-th"><span><?php echo __('Guest Name') ?></span></th>
+                <th class="data-grid-th"><span><?php echo __('Email') ?></span></th>
+            </tr>
+            <?php if ($block->haveOrder() != 0):$i = 0; ?>
+                <?php foreach ($orderCollection as $order): ?>
+                    <?php $orderItem = $block->getOrder($order->getData('order_id')) ?>
+                    <?php foreach ($orderItem->getAllVisibleItems() as $item): ?>
+                        <tr data-function="page"
+                            data-page="<?php echo (int)($i / 10) ?>" <?php if ($i >= 10) echo "hidden" ?> >
+                            <td data-th="<?php echo $block->escapeHtml(__('Stt')) ?>" class="col-title">
+                                <?php echo ++$i ?>
+                            </td>
+                            <td data-th="<?php echo $block->escapeHtml(__('Product Name')) ?>" class="col-title">
+                                <?php echo ($item->getData('product_type') == 'simple' || $item->getData('product_type') == 'downloadable' || $item->getData('product_type') == 'virtual') ? $item->getData('name') : $item->getData('product_options')['simple_name']; ?>
+                            </td>
+                            <td data-th="<?php echo $block->escapeHtml(__('Qty')) ?>" class="col-title">
+                                <?php echo $item->getData('product_options')['info_buyRequest']['qty'] ?>
+                            </td>
+                            <td data-th="<?php echo $block->escapeHtml(__('Sender Name')) ?>" class="col-title">
+                                <?php echo $orderItem->getBillingAddress()->getFirstName() . ' ' . $orderItem->getBillingAddress()->getLastName() ?>
+                            </td>
+                            <td data-th="<?php echo $block->escapeHtml(__('Sender Email')) ?>" class="col-title">
+                                <?php echo $orderItem->getBillingAddress()->getEmail() ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr data-function="page" class="data-grid-tr-no-data">
+                    <td class="empty-text" colspan="8"><?php echo __('We couldn\'t find any records.') ?></td>
+                </tr>
+            <?php endif; ?>
+        </table>
+        <?php if ($block->haveOrder() != 0): ?>
+            <?php $page = (float)$i / 10 - (int)($i / 10) > 0 ? (int)($i / 10) + 1 : (int)($i / 10); ?>
+            <?php if ($page > 0 && $i > 10): ?>
+                <div class="list-page" style="text-align: center;margin:10px; background-color: white; color:#333333">
+                    <?php for ($count = 0; $count < $page; $count++): ?>
+                        <div style="display: inline-block" data-function="tab" data-click="<?php echo $count ?>"><span
+                                    style="padding: 5px;"><?php echo $count; ?></span></div>
+                    <?php endfor; ?>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
+    </div>
+</div>
+<!--Guest View-->
+<div class="col-right">
+    <div class="show-guest-view" name="show-guest-view" id="show-guest-view" hidden>
+        <select class="select-action-view" id="select-action-view">
+            <option checked><?php echo __('----Select Action----') ?></option>
+            <option value="view-guest-page">
+                <?php echo __('View Guest Page') ?>
+            </option>
+            <option value="change-background">
+                <?php echo __('Change Background') ?>
+            </option>
+        </select>
+        <div class="change-background" id="change-background" hidden>
+            <form id="form-upload-image" class="form-upload-image" name="form-upload-image" method="POST"
+                  enctype="multipart/form-data" action="<?php echo $block->getSaveImageUrl() ?>">
+                <i class="fa fa-camera" aria-hidden="true"></i>
+                <input name="image" id="image" type="file" value=""/>
+                <input style="margin-top: 10px" class="action primary" type="button" id="btn-save-image"
+                       value="<?php echo __('Save') ?>"/>
+                <a href="<?php echo $block->getResetImageUrl() ?>">
+                    <input style="margin-top: 10px" class="action primary" type="button" id="btn-reset-image"
+                           value="<?php echo __('Reset') ?>"/>
+                </a>
+                <label style="color:red;" class="label" id="error-type-file"></label>
+                <input name="registry_id" hidden value="<?php echo $registry->getData('gift_id') ?>"/>
+                <input name="registry_type" hidden value="<?php echo $eventType; ?>"/>
+            </form>
+        </div>
+        <div class="show-div" name="show-div" id="show-div">
+            <div class="loader_loadpage" id="loader_loadpage" hidden></div>
+        </div>
+    </div>
+</div>
+<!--Popup share url-->
+<div id="popupLogin" class="modal-address">
+    <!-- Modal content -->
+    <div class="modal-content-address">
+        <span class="close">&times;</span>
+        <div class="fieldset">
+            <div class="field">
+                <div class="label">Share URL:</div>
+                <input id="url-share-txt" type="text" value="<?php echo $block->getLinkShare()?>"/>
+                <input id="btn-copy" class="action primary" type="button" value="Copy To Clipboard"/>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Popup share url->
+<!--End Guest view-->
+<script>
+    // This example requires the Places library. Include the libraries=places
+    // parameter when you first load the API. For example:
+    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+    window.setTimeout(function(){
+        initMap();
+    }, 1000);
+
+    var lat,lng;
+    // address to lat & long
+    function loadGeocode() {
+        var locationAddress = '<?=$registry->getLocation()?>';
+        var url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+locationAddress+'&key=AIzaSyAqH83QqletUOJXv14oLfl76kcEAW29vhw';
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var latlong = JSON.parse(this.responseText);
+                lat = latlong['results'][0]['geometry'].location.lat * 1;
+                lng =  latlong['results'][0]['geometry'].location.lng * 1;
+            }
+        };
+        xhttp.open("GET", url, true);
+        xhttp.send();
+    }
+
+    function initMap() {
+        loadGeocode();
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: lat, lng: lng},
+            zoom: 13
+        });
+        // lat & long to address
+        function loadAddress(lat, lng) {
+            var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+lng+'&key=AIzaSyAqH83QqletUOJXv14oLfl76kcEAW29vhw';
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var address = JSON.parse(this.responseText);
+                    document.getElementsByName("location")[0].value = address['results'][0]['formatted_address'];
+                }
+            };
+            xhttp.open("GET", url, true);
+            xhttp.send();
+        }
+        google.maps.event.addListener(map, 'click', function( event ){
+            loadAddress(event.latLng.lat(), event.latLng.lng());
+        });
+
+        var card = document.getElementById('pac-card');
+        var input = document.getElementById('pac-input');
+
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+
+        // Bind the map's bounds (viewport) property to the autocomplete object,
+        // so that the autocomplete requests use the current map bounds for the
+        // bounds option in the request.
+        autocomplete.bindTo('bounds', map);
+
+        var infowindow = new google.maps.InfoWindow();
+        var infowindowContent = document.getElementById('infowindow-content');
+        infowindow.setContent(infowindowContent);
+        var marker = new google.maps.Marker({
+            map: map,
+            anchorPoint: new google.maps.Point(0, -29)
+        });
+
+        autocomplete.addListener('place_changed', function () {
+            infowindow.close();
+            marker.setVisible(false);
+            var place = autocomplete.getPlace();
+            if (!place.geometry) {
+                // User entered the name of a Place that was not suggested and
+                // pressed the Enter key, or the Place Details request failed.
+                window.alert("No details available for input: '" + place.name + "'");
+                return;
+            }
+
+            // If the place has a geometry, then present it on a map.
+            if (place.geometry.viewport) {
+                map.fitBounds(place.geometry.viewport);
+            } else {
+                map.setCenter(place.geometry.location);
+                map.setZoom(17);  // Why 17? Because it looks good.
+            }
+            marker.setPosition(place.geometry.location);
+            marker.setVisible(true);
+
+            var address = '';
+            if (place.address_components) {
+                address = [
+                    (place.address_components[0] && place.address_components[0].short_name || ''),
+                    (place.address_components[1] && place.address_components[1].short_name || ''),
+                    (place.address_components[2] && place.address_components[2].short_name || '')
+                ].join(' ');
+            }
+
+            infowindowContent.children['place-icon'].src = place.icon;
+            infowindowContent.children['place-name'].textContent = place.name;
+            infowindowContent.children['place-address'].textContent = address;
+            infowindow.open(map, marker);
+        });
+
+        // Sets a listener on a radio button to change the filter type on Places
+        // Autocomplete.
+        function setupClickListener(id, types) {
+            var radioButton = document.getElementById(id);
+            radioButton.addEventListener('click', function () {
+                autocomplete.setTypes(types);
+            });
+        }
+
+        setupClickListener('changetype-all', []);
+        setupClickListener('changetype-address', ['address']);
+        setupClickListener('changetype-establishment', ['establishment']);
+        setupClickListener('changetype-geocode', ['geocode']);
+
+        document.getElementById('use-strict-bounds')
+            .addEventListener('click', function () {
+                console.log('Checkbox clicked! New state=' + this.checked);
+                autocomplete.setOptions({strictBounds: this.checked});
+            });
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqH83QqletUOJXv14oLfl76kcEAW29vhw&libraries=places&callback=initMap"
+        async defer>
+</script>
+<script>
+    require([
+        'jquery',
+        "jquery/ui",
+        'Magento_Ui/js/modal/confirm',
+        "Magento_Ui/js/modal/modal",
+        'Magenest_GiftRegistry/js/owl.carousel',
+        'Magenest_GiftRegistry/js/addToCart'
+    ], function ($) {
+        'use strict';
+        // $("#pac-input").click(function () {
+        //     $("#map-section").toggle();
+        // });
+        $('.close').click(function () {
+            $('#popupLogin').hide();
+        });
+        $("#url-share").click(function () {
+            $("#popupLogin").show();
+        });
+        $("#btn-copy").click(function() {
+            $('#url-share-txt').select();
+            document.execCommand("copy");
+            $('#url-share-txt').blur();
+        })
+
+        $('div[data-click="0"]').css('color', 'white');
+        $('div[data-click="0"]').css('background-color', '#333333');
+
+        //Click page order list
+        $('div[data-function="tab"]').click(function () {
+            var page = $(this).data('click');
+            $('div[data-function="tab"]').each(function () {
+                if ($(this).data('click') == page) {
+                    $(this).css('color', 'white');
+                    $(this).css('background-color', '#333333');
+                } else {
+                    $(this).css('color', '#333333');
+                    $(this).css('background-color', 'white');
+                }
+            });
+            $('tr[data-function="page"]').each(function () {
+                if ($(this).data('page') == page) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+
+        //Update item list
+        $('#btnUpdate').on('click', function () {
+            $('#list_item_form').validate();
+            $('#list_item_form').valid();
+            $('#list_item_form').submit();
+        });
+
+
+        $(document).ready(function () {
+            $('select[data-role="adjust-select"]').each(function () {
+                var realValue = $(this).data('myvalue');
+                $(this).val(realValue);
+            });
+        });
+
+        //Save information button click
+        $('#save_btn').click(function () {
+            if ($('#re_password').val() != $('#password').val() && $(".password-field").css('display') !== 'none') {
+                $('#check_password_label').show();
+            } else {
+                var form = $('#registry-infor-form');
+                form.validate();
+                if (form.valid()) {
+                    $('#registry-infor-form').submit();
+                }
+            }
+        });
+
+        //Check enter right password
+        $('#re_password').keyup(function () {
+            if ($('#re_password').val() != $('#password').val()) {
+                $('#check_password_label').show();
+            } else {
+                $('#check_password_label').hide();
+            }
+        });
+        $('#change_pass').click(function () {
+            $('.password-field').show();
+            console.log('show');
+            $('#change-password-btn').hide();
+        });
+
+        //Show password div
+        //$('select[data-role="defined-selected"]').change(function () {
+        //    var primacy = $('select[data-role="defined-selected"] option:selected').val();
+        //    if (primacy == 'private') {
+        //        var temp = '<?php //echo $registry->getData('privacy');?>//';
+        //        if (temp == 'public') {
+        //            $('.password-field').show();
+        //        }
+        //    } else if (primacy == 'public') {
+        //        $('.password-field').hide();
+        //
+        //    }
+            //if($('.password-field').is(':visible')){
+            //    $("#change_pass").children('b').html("<?php //echo __("Hide")?>//");
+            //}else{
+            //    $("#change_pass").children('b').html("<?php //echo __("Change Password")?>//");
+            //}
+        // });
+
+        //List item onclick effects
+        $('#list-item').click(function () {
+            $('#list-item').css('box-shadow', '-5px 0px 0px 0px black');
+            $('#list-item').css('background-color', '#F3793B');
+            $('#list-item').css('color', '#FFF');
+            $("#edit-container").hide(1000);
+            $('#share-container').hide(1000);
+            $("#find-container").hide(1000);
+            $("#list-share").hide(1000);
+            $('#list-order-container').hide(1000);
+            $('#show-guest-view').hide(1000);
+            $("#list-container").show(1000);
+            $('#edit-information').removeAttr('style');
+            $('#share-registry').removeAttr('style');
+            $('#find-registry').removeAttr('style');
+            $('#guest-view').removeAttr('style');
+            $('#list-order').removeAttr('style');
+        });
+
+        //List order onclick effects
+        $('#list-order').click(function () {
+            $('#list-order').css('box-shadow', '-5px 0px 0px 0px black');
+            $('#list-order').css('background-color', '#F3793B');
+            $('#list-order').css('color', '#FFF');
+            $("#edit-container").hide(1000);
+            $('#share-container').hide(1000);
+            $("#find-container").hide(1000);
+            $("#list-share").hide(1000);
+            $("#list-container").hide(1000);
+            $('#show-guest-view').hide(1000);
+            $('#list-order-container').show(1000);
+            $('#edit-information').removeAttr('style');
+            $('#share-registry').removeAttr('style');
+            $('#find-registry').removeAttr('style');
+            $('#guest-view').removeAttr('style');
+            $('#list-item').removeAttr('style');
+        });
+
+        //Edit information onclick effects
+        $('#edit-information').click(function () {
+            $('#edit-information').css('box-shadow', '-5px 0px 0px 0px black');
+            $('#edit-information').css('background-color', '#F3793B');
+            $('#edit-information').css('color', '#FFF');
+            $('#share-container').hide(1000);
+            $("#find-container").hide(1000);
+            $("#list-share").hide(1000);
+            $("#list-container").hide(1000);
+            $('#list-order-container').hide(1000);
+            $('#show-guest-view').hide(1000);
+            $("#edit-container").show(1000);
+            $('#share-registry').removeAttr('style');
+            $('#find-registry').removeAttr('style');
+            $('#guest-view').removeAttr('style');
+            $('#list-item').removeAttr('style');
+            $('#list-order').removeAttr('style');
+        });
+
+        //Find registry onclick effects
+        $('#find-registry').click(function () {
+            $('#share-container').hide(1000);
+            $("#list-share").hide(1000);
+            $("#list-container").hide(1000);
+            $("#edit-container").hide(1000);
+            $('#list-order-container').hide(1000);
+            $("#find-container").show(1000);
+            $('#share-registry').removeAttr('style');
+            $('#find-registry').removeAttr('style');
+            $('#guest-view').removeAttr('style');
+            $('#list-item').removeAttr('style');
+            $('#edit-information').removeAttr('style');
+            $('#list-order').removeAttr('style');
+            $('#find-registry').css('box-shadow', '-5px 0px 0px 0px black');
+            $('#find-registry').css('background-color', '#F3793B');
+            $('#find-registry').css('color', '#FFF');
+        });
+
+        //Share registry onclick effects
+        $('#share-registry').click(function () {
+            $('#share-registry').css('box-shadow', '-5px 0px 0px 0px black');
+            $('#share-registry').css('background-color', '#F3793B');
+            $('#share-registry').css('color', '#FFF');
+            $('#edit-information').removeAttr('style');
+            $('#find-registry').removeAttr('style');
+            $('#guest-view').removeAttr('style');
+            $('#list-item').removeAttr('style');
+            $('#list-order').removeAttr('style');
+            $("#list-share").slideToggle(1000);
+        });
+
+        //Guest view onclick effects
+        $('#guest-view').click(function () {
+            $('#guest-view').css('box-shadow', '-5px 0px 0px 0px black');
+            $('#guest-view').css('background-color', '#F3793B');
+            $('#guest-view').css('color', '#FFF');
+            $('#share-container').hide(1000);
+            $("#find-container").hide(1000);
+            $("#list-share").hide(1000);
+            $("#list-container").hide(1000);
+            $('#list-order-container').hide(1000);
+            $("#edit-container").hide(1000);
+            $('#show-guest-view').show(1000);
+            $('#loader_loadpage').show();
+            //$('#show-div').load('<?php //echo $block->getViewUrl($registry->getData());?>//', null, showLoader);
+            $('#show-div').html('<object type="text/html" data="<?php echo $block->getViewUrl($registry->getData());?>" ></object>').children().css({"width": "100%", "height": "100%"});
+            $('#share-registry').removeAttr('style');
+            $('#find-registry').removeAttr('style');
+            $('#list-item').removeAttr('style');
+            $('#list-order').removeAttr('style');
+            $('#edit-information').removeAttr('style');
+        });
+
+        function showLoader() {
+            $('#loader_loadpage').hide();
+        }
+
+        $('#change-background-btn').click(function () {
+            $('#change-background').toggle();
+        });
+        //Popup confirm delete
+
+
+        //Add items
+        $("#btnAddItems").click(function(){
+            window.location.href = $("#btnAddItems").attr('post-url');
+        });
+
+        //Delete all item in item-list
+        $("#btnDellAll").click(function () {
+            var count = 0;
+            $(".checkdelete").each(function () {
+                if ($(this).is(":checked")) {
+                    count++;
+            }});
+            if(count>0) {
+                $('#confirmDelete').show();
+                $('#okDelete').click(function () {
+                    $('#confirmDelete').hide();
+                    var listDelete = new Array();
+                    var action = $("#btnDellAll").attr('post-url');
+                    var idGift = $("#btnDellAll").attr('idGift');
+                    count = 0;
+                    $(".checkdelete").each(function () {
+                        if ($(this).is(":checked")) {
+                            count++;
+                            listDelete.push($(this).val());
+                        }
+                    });
+                    if (count) {
+                        var posting = $.post(action, {listdelete: listDelete, type: "massdelete", id: idGift});
+                        jQuery('body').loader('show');
+                        posting.done(function (data) {
+                            window.location.href = $(location).attr('href');
+                            jQuery('body').loader('hide');
+                        });
+                    } else {
+                        if ($(".message-error")) {
+                            $(".message-error").remove();
+                            $(".message-success").remove();
+                        }
+                        var html = '<div  class="message-error error message" ><div>You must select item!!</div></div>';
+                        $('.my_message').append(html);
+                    }
+                });
+                $('#noDelete').click(function () {
+                    $('#confirmDelete').hide();
+                });
+            }else {
+                console.log("No item select");
+                $('#noItemDelete').show();
+                $('#ok').click(function () {
+                    $('#noItemDelete').hide();
+                });
+            }
+        });
+
+        $('#select-delete').on('change', function () {
+            if ($('#select-delete option:checked').val() == 1) {
+                $(".checkdelete").attr('checked', true);
+            } else {
+                $(".checkdelete").attr('checked', false);
+            }
+        });
+
+        $('#unselect').on('click', function () {
+            $(".checkdelete").each(function () {
+                if ($(this).is(":checked")) {
+                    $(this).attr('checked', false);
+                }
+            })
+        });
+
+        //Share mail onclick
+        $('#share-email').click(function () {
+            $("#list-container").hide(1000);
+            $("#edit-container").hide(1000);
+            $('#list-order-container').hide(1000);
+            $('#show-guest-view').hide(1000);
+            $('#share-container').show(1000);
+            $('html, body').animate({
+                scrollTop: $("#share-container").offset().top
+            }, 2000);
+            $('#recipient').focus();
+        });
+
+        //Share registry via mail
+        $('#form_email_submit_btn').click(function () {
+                var recipient = $("#recipient").val();
+                var email_subject = $("#email_subject").val();
+                var message = $("#message").val();
+                var formKey = $("#form-key").attr("value");
+                var recipient_array = recipient.split(",");
+                var check = false;
+                var recipient_error = 'Email:';
+                for (var i = 0; i < recipient_array.length; i++) {
+                    if (!validateEmail(recipient_array[i])) {
+                        check = true;
+                        recipient_error += recipient_array[i] + " ";
+                        console.log('Invalid Email Address:' + recipient_array[i]);
+                    }
+                }
+                if (check == false) {
+                    $('#email-validate-error').hide();
+                    $("#recipient").css('border', '');
+                    jQuery('body').loader('show');
+                    $.ajax(
+                        {
+                            type: "POST",
+                            url: "<?php echo $block->getSendMailUrl()?>?isAjax=true",
+                            data: {
+                                recipient: recipient,
+                                email_subject: email_subject,
+                                message: message,
+                                form_key: formKey
+                            },
+                            showLoader: true,
+                            success: function (response) {
+                                window.location.href = $(location).attr('href');
+                                if (response['error']) {
+                                    console.log(response['description']);
+                                } else {
+                                    jQuery('body').loader('hide');
+                                }
+                            }
+                        }
+                    );
+                } else {
+                    $('#email-validate-error').html("<p>" + recipient_error + "is not validate. Please check!</p>");
+                    $('#email-validate-error').show();
+                    $("#recipient").css('border', 'solid 1px red');
+                }
+            }
+        );
+
+        //Validate mail
+        function validateEmail(email) {
+            var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+            if (reg.test(email) == false) {
+                return false;
+            }
+            return true;
+
+        }
+
+        //Select action view page
+        $('#select-action-view').on('change', function () {
+            if ($('#select-action-view option:checked').val() == 'view-guest-page') {
+                window.location.href = '<?php echo $block->getViewUrl($registry->getData());?>';
+            } else {
+                if ($('#select-action-view option:checked').val() == 'change-background') {
+                    $('#change-background').show();
+                }
+            }
+        });
+
+        //Button save image via ajax
+        $('#btn-save-image').click(function () {
+            var file = $('#image').val();
+            if (file == '') {
+                $('#error-type-file').empty();
+                $('#error-type-file').append('<?php echo __('Please add the background image!')?>');
+            } else {
+                var ext = file.split(".");
+                ext = ext[ext.length - 1].toLowerCase();
+                var arrayExtensions = ["jpg", "jpeg", "png"];
+                if (arrayExtensions.lastIndexOf(ext) == -1) {
+                    $('#error-type-file').empty();
+                    $('#error-type-file').append('<?php echo __('Only accept png,jpeg,jpg extension!')?>');
+                    $("#image").val("");
+                } else {
+                    $('#error-type-file').empty();
+                    $('#form-upload-image').submit();
+                }
+            }
+        });
+
+    });
+</script>
+<script type="text/javascript">
+    require([
+            'jquery',
+            'Magento_Ui/js/modal/confirm'
+        ],
+        function ($, confirmation) {
+            //Delete registry
+            $('#delete-registry').on('click', function (event) {
+                event.preventDefault;
+                confirmation({
+                    title: 'Are You Sure',
+                    content: 'Your gift will be delete.',
+                    actions: {
+                        confirm: function () {
+                            var gift_id = $('#delete-registry').data('giftid');
+                            var url = $('#delete-registry').data('url');
+                            var list_gift_url = $("#list_gift_url").val();
+                            $.ajax(
+                                {
+                                    type: "POST",
+                                    url: url,
+                                    data: {
+                                        gift_id: gift_id
+                                    },
+                                    showLoader: true,
+                                    success: function (response) {
+                                        window.location.href = list_gift_url;
+                                    },
+
+                                });
+                        },
+                        cancel: function () {
+                            return false;
+                        },
+                        always: function () {
+                        }
+                    }
+                });
+            });
+        }
+    );
+</script>
+<script type="text/javascript">
+    require([
+        "jquery",
+        "Magenest_GiftRegistry/js/addressChosen",
+        "mage/calendar",
+        "domReady!"
+    ], function ($, addressChosen, domReady) {
+        //Form edit information: add address, calendar
+        $('input[data-role="date-picker"]').calendar({dateFormat: 'mm-dd-yy'});
+
+        var addressChosen = new addressChosen({
+            updateOption: true,
+            getAddressUrl: '<?php echo $block->getUrl('giftregistrys/customer/address')?>'
+        });
+
+        $(document).ready(function () {
+            $('select[data-role="defined-selected"]').each(function () {
+                var realValue = $(this).data('myvalue');
+                $(this).val(realValue);
+            });
+        });
+    });
+</script>
+<script type="text/x-magento-init">
+    {
+        "#registry-infor-form": {
+            "validation": {}
+        }
+    }
+
+
+
+</script>
+<script type="text/javascript">
+    require([
+        'jquery',
+        'mage/mage'
+    ], function ($) {
+
+        var dataForm = $('#registry-infor-form');
+        dataForm.mage('validation', {});
+
+        var privacySelectInput = $("#privacy-select-input");
+        var changePasswordBtn = $("#change-password-btn");
+
+        privacySelectInput.change(function () {
+            if(this.value == 'public'){
+                changePasswordBtn.hide(100);
+                $('.password-field').hide(100);
+            }else {
+                changePasswordBtn.show(100);
+            }
+        });
+
+    });
+</script>
+<script>
+    require([
+        "jquery",
+        "mage/calendar"
+    ], function ($) {
+
+        $("#date").calendar({
+            minDate: new Date(),
+            dateFormat: 'mm-dd-yy'
+        });
+    });
+</script>

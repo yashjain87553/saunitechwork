@@ -1,0 +1,63 @@
+<?php
+// @codingStandardsIgnoreFile
+?>
+<div class="field title required">
+    <label class="label" for="zip"><span><?php /* @escapeNotVerified */ echo __('Title') ?></span></label>
+    <div class="control">
+        <input type="text" name="title" value="<?php echo $block->escapeHtml($block->getAddress()->getPostcode()) ?>" title="<?php /* @escapeNotVerified */ echo __('Zip/Postal Code') ?>" id="zip" class="input-text validate-zip-international <?php /* @escapeNotVerified */ echo $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('postcode') ?>">
+    </div>
+</div>
+
+<div class="field description required">
+    <label class="label" for="description "><span><?php /* @escapeNotVerified */ echo __('Description') ?></span></label>
+    <div class="control">
+        <input type="text" name="description " value="<?php echo $block->escapeHtml($block->getAddress()->getPostcode()) ?>" title="<?php /* @escapeNotVerified */ echo __('Zip/Postal Code') ?>" id="zip" class="input-text validate-zip-international <?php /* @escapeNotVerified */ echo $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('postcode') ?>">
+    </div>
+</div>
+
+<div class="field location required">
+    <label class="label" for="location"><span><?php /* @escapeNotVerified */ echo __('Location') ?></span></label>
+    <div class="control">
+        <input type="text" name="location" value="<?php echo $block->escapeHtml($block->getAddress()->getPostcode()) ?>" title="<?php /* @escapeNotVerified */ echo __('Zip/Postal Code') ?>" id="zip" class="input-text validate-zip-international <?php /* @escapeNotVerified */ echo $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('postcode') ?>">
+    </div>
+</div>
+
+<div class="field date required">
+    <label class="label" for="date"><span><?php /* @escapeNotVerified */ echo __('Date') ?></span></label>
+    <div class="control">
+        <input type="text" name="location" value="<?php echo $block->escapeHtml($block->getAddress()->getPostcode()) ?>" title="<?php /* @escapeNotVerified */ echo __('Zip/Postal Code') ?>" id="zip" class="input-text validate-zip-international <?php /* @escapeNotVerified */ echo $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('postcode') ?>">
+    </div>
+</div>
+
+<div class="field status required">
+    <label class="label" for="status"><span><?php /* @escapeNotVerified */ echo __('Status') ?></span></label>
+    <div class="control">
+        <select name="status">
+            <option value="1" ><?php  echo __('Active') ?></option>
+            <option value="0" ><?php  echo __('Inactive') ?></option>
+
+        </select>
+    </div>
+</div>
+
+<div class="field visibility required">
+    <label class="label" for="status"><span><?php /* @escapeNotVerified */ echo __('Status') ?></span></label>
+    <div class="control">
+        <select name="visibility">
+            <option value="1" ><?php  echo __('Active') ?></option>
+            <option value="0" ><?php  echo __('Inactive') ?></option>
+
+        </select>
+    </div>
+</div>
+
+<div class="field status required">
+    <label class="label" for="status"><span><?php /* @escapeNotVerified */ echo __('Visibility') ?></span></label>
+    <div class="control">
+        <select name="status">
+            <option value="1" ><?php  echo __('Public View') ?></option>
+            <option value="0" ><?php  echo __('Private view') ?></option>
+
+        </select>
+    </div>
+</div>

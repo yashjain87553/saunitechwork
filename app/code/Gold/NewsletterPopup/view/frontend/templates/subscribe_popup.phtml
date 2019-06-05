@@ -1,0 +1,74 @@
+<?php 
+
+/**
+ * @author Nir Goldman
+ * @package NewsletterPopup
+ */
+
+      $mediaUrl = $block->getBaseUrl()."pub/media/";
+
+
+
+
+//text
+$title=$block->getConfigVars('adminsample','txt','textsample');
+
+
+
+$background_color_popup_style="style=background-color:".$block->getConfigVars('adminsample','txt','my_color_option')."";
+$color_popup_style="style=color:".$block->getConfigVars('adminsample','txt','colorsample')."";
+
+
+$button_background_color_option='style=background-color:'.$block->getConfigVars('adminsample','args_of_buttons','button_background_color_option')."";
+$button_text_color_option='style=color:'.$block->getConfigVars('adminsample','args_of_buttons','button_text_color_option')."";
+
+
+
+
+?>
+<div id="popup_newsltr" class="ontop">
+
+    <div class="popupWrapper" <?php echo $background_color_popup_style;?>>
+        <div id="popup" class="block newsletter" <?php echo $color_popup_style;?>>
+            <div class="title">
+                <img src="<?php echo $mediaUrl;?>wysiwyg/infortis/join_zirg.jpg" alt="Join zirg club">
+                <a href="#" onClick="hide('popup_newsltr')">X</a>
+            </div>
+            <div class="content" >
+                <h3><?php echo $title  ?></h3>
+                <form class="form subscribe"
+                      novalidate
+                      action="<?php  echo $block->getFormActionUrl() ?>"
+                      method="post"
+                      data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+                      id="newsletter-validate-detail2">
+                    <div class="field newsletter">
+                        <label class="label" for="newsletter"><span><?php  echo __('Sign Up for Our Newsletter:') ?></span></label>
+                        <div class="control custom_newsletter">
+                            <input name="email" type="email" id="newsletter2"
+                                   placeholder="<?php echo __('Enter your email address') ?>"
+                                   data-validate="{required:true, 'validate-email':true}"/>
+                        </div>
+					</div>
+                    <div class="actions">
+                        <button class="action subscribe primary" title="<?php  echo __('Subscribe') ?>" type="submit" <?php echo $button_background_color_option?>>
+                            <span <?php echo $button_text_color_option?>><?php echo __('Subscribe') ?></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--
+<script type="text/javascript">
+function pop(popup_newsltr) {
+        setTimeout(
+		  function() 
+		  {
+			document.getElementById(popup_newsltr).style.display = 'block';
+		  }, 15000);
+}
+</script>
+-->

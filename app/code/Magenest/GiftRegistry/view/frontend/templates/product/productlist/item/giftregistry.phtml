@@ -1,0 +1,18 @@
+<?php /** @var Magento\Catalog\Block\Product\ProductList\Item\Block $block */
+// @codingStandardsIgnoreFile
+?>
+<?php
+    $actionUrl = $block->getUrl(
+        'giftregistrys/index/checkproducts',
+        ['productId' => $block->getProduct()->getId()]);
+?>
+<a href="<?=$actionUrl?>"
+   data-product-id = "<?=$block->getProduct()->getId()?>"
+   class="action addgiftregistry"
+   data-action="add-gift-registry"
+   data-product-url="<?php echo $block->getProduct()->getProductUrl() ?>"
+   title="<?php echo $block->escapeHtml(__('Add to gift registry')); ?>"
+   role="button">
+    <i class="fa fa-gift" aria-hidden="true" style="font-size:20px"></i>
+    <span><?php /* @escapeNotVerified */ echo __('Add to Gift registry') ?></span>
+</a>

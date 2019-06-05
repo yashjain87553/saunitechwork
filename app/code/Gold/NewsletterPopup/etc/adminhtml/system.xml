@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/system_file.xsd">
+    <system>
+        <tab id="adminsample" translate="label" sortOrder="700">
+            <label>Newsletter Popup</label>
+        </tab>
+        <section id="adminsample" translate="label" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Configuration</label>
+            <tab>adminsample</tab>
+            <resource>Gold_NewsletterPopup::config</resource>
+            <group id="txt" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Setting for Newsletter Popup</label>
+                <field id="textsample" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Text for newsletter popup</label>
+                </field>
+                <field id="my_color_option" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background color for newsletter popup</label>
+                    <comment><![CDATA[Background color]]></comment>
+                    <frontend_model>Gold\NewsletterPopup\Block\Color</frontend_model> <!-- Our block for attaching color picker to text box -->
+                </field>
+                <field id="colorsample" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Font color for newsletter popup</label>
+                    <comment><![CDATA[Text color]]></comment>
+                    <frontend_model>Gold\NewsletterPopup\Block\Color</frontend_model> <!-- Our block for attaching color picker to text box -->
+                </field>
+            </group>
+            <group id="args_of_buttons" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Colors on the buttons</label>
+                <field id="button_background_color_option" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background color for newsletter popup</label>
+                    <comment><![CDATA[Background color]]></comment>
+                    <frontend_model>Gold\NewsletterPopup\Block\Color</frontend_model> <!-- Our block for attaching color picker to text box -->
+                </field>
+                <field id="button_text_color_option" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Font color for newsletter popup</label>
+                    <comment><![CDATA[Text color]]></comment>
+                    <frontend_model>Gold\NewsletterPopup\Block\Color</frontend_model> <!-- Our block for attaching color picker to text box -->
+                </field>
+            </group>
+
+
+        </section>
+    </system>
+</config>

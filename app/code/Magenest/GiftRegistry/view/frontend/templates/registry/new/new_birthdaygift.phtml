@@ -1,0 +1,38 @@
+<?php
+// @codingStandardsIgnoreFile
+$link = $block->getViewFileUrl('/');
+?>
+<img class="img-back1" style="position: absolute;left: 800px;" src="<?php echo $block->getViewFileUrl('Magenest_GiftRegistry/images/new-gift/new-birthday1.jpeg') ?>" alt="">
+<img class="img-back2" style="position: absolute;top: 500px;left: 800px;" src="<?php echo $block->getViewFileUrl('Magenest_GiftRegistry/images/new-gift/new-birthday2.jpeg') ?>" alt="">
+<img class="img-back3" style="position: absolute;top: 910px;left: 800px;" src="<?php echo $block->getViewFileUrl('Magenest_GiftRegistry/images/new-gift/new-birthday3.jpeg') ?>" alt="">
+<fieldset class="fieldset">
+    <h2 class="legend"><?php echo __("About Party")  ?> </h2>
+    <input type="hidden" name="type" value="<?php echo $type  ?>">
+    <div class="field required">
+        <div class="panel-heading label"><?php echo __('Born Date') ?></div>
+        <div class="panel-body">
+            <input name="date-birthday" data-validate="{required:true}" id="date-birthday" class="background-none"  data-role="date-picker" class="picker"  type="text" value="<?php echo $usDateFormat ?>"/> <span class="date-icon"></span>
+            <small style="color: #8e8e8e"><?=__('E.g. 01-01-2001') ?></small>
+        </div>
+    </div>
+    <div class="field required">
+        <div class="panel-heading label"><?php echo __('Name Birthday? ') ?></div>
+        <div class="panel-body">
+            <input type="text" data-validate="{required:true}" name="name-birthday" value="" placeholder="Enter your name birthday"/>
+        </div>
+    </div>
+    <div class="my-clear"></div>
+</fieldset>
+
+<script>
+    require([
+        "jquery",
+        "mage/calendar"
+    ], function ($) {
+
+        $("#date-birthday").calendar({
+            maxDate: new Date(),
+            dateFormat: 'mm-dd-yy'
+        });
+    });
+</script>

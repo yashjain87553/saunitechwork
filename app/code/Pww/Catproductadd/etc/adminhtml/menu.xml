@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Pww_Catproductadd::catproductadd" title="Category Product Add" module="Pww_Catproductadd" sortOrder="60" parent="Pww_Filemanager::fileuploader" action="pwwcatproductadd/catproductadd" resource="Pww_Filemanager::fileuploader" />
+    </menu>x
+</config>

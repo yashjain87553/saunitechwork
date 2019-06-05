@@ -1,0 +1,99 @@
+<?php
+    $base_url=$block->getBaseUrl();
+
+
+$categoryId = 10;
+$category = $block->loadcat($categoryId);
+$subcategories = $category->getChildren();
+$subcategoriesArray = explode(',',$subcategories);
+
+$categoryId1 = 12;
+$category1 = $block->loadcat($categoryId1);
+$subcategories1 = $category1->getChildren();
+$subcategoriesArray1 = explode(',',$subcategories1);
+
+$categoryId2 = 15;
+$category2 = $block->loadcat($categoryId2);
+$subcategories2 = $category2->getChildren();
+$subcategoriesArray2 = explode(',',$subcategories2);
+
+$categoryId3 = 7;
+$category3 = $block->loadcat($categoryId3);
+$subcategories3 = $category3->getChildren();
+$subcategoriesArray3 = explode(',',$subcategories3);
+$base_url=$block->getBaseUrl();
+?>
+
+<div class="grid12-3">
+		<div class="mobile-collapsible">
+			<h6 class="block-title heading">Fragrance &amp; Cologne</h6>
+			<div class="block-content foot_cat_list">
+				<ul class="disc">
+					<?php for($i=0;$i<sizeof($subcategoriesArray);$i++) { 
+					$cat_id = $subcategoriesArray[$i];
+					$scategory = $block->loadcat($cat_id);
+					?>
+						<li><a href="<?php echo $base_url."fragrance-cologne/".$scategory->getUrlKey(); ?>.html"><?php echo $scategory->getName(); ?></a></li>
+					<?php } ?>
+				</ul>
+			</div>
+			<h6 class="block-title heading">Haircare</h6>
+			<div class="block-content foot_cat_list">
+				<ul class="disc">
+					<?php for($y=0;$y<sizeof($subcategoriesArray1);$y++) { 
+					$cat_id1 = $subcategoriesArray1[$y];
+					$scategory1 = $block->loadcat($cat_id1);
+					?>
+						<li><a href="<?php echo $base_url."haircare/".$scategory1->getUrlKey(); ?>.html"><?php echo $scategory1->getName(); ?></a></li>
+					<?php } ?>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="grid12-3">
+		<div class="mobile-collapsible">
+			<h6 class="block-title heading">Skincare</h6>
+			<div class="block-content foot_cat_list">
+			<ul class="disc">
+				<?php for($z=0;$z<sizeof($subcategoriesArray2);$z++) { 
+					$cat_id2 = $subcategoriesArray2[$z];
+					$scategory2 = $block->loadcat($cat_id2);
+					?>
+						<li><a href="<?php echo $base_url."skincare/".$scategory2->getUrlKey(); ?>.html"><?php echo $scategory2->getName(); ?></a></li>
+					<?php } ?>
+			</ul>
+			</div>
+		</div>
+	</div>
+	<div class="grid12-3">
+		<div class="mobile-collapsible">
+			<h6 class="block-title heading">Cosmetic</h6>
+			<div class="block-content foot_cat_list">
+			<ul class="disc ">
+			<?php for($w=0;$w<sizeof($subcategoriesArray3);$w++) { 
+					$cat_id3 = $subcategoriesArray3[$w];
+					$scategory3 = $block->loadcat($cat_id3);
+					?>
+						<li><a href="<?php echo $base_url."cosmetics/".$scategory3->getUrlKey(); ?>.html"><?php echo $scategory3->getName(); ?></a></li>
+					<?php } ?>
+			</ul>
+			</div>
+			<h6 class="block-title heading">Gift Ideas</h6>
+			
+			<div class="block-content foot_cat_list">
+				<ul class="disc">
+				<li><a href="<?php echo $base_url?>great-gift-ideas/men.html">Gifts for Him</a></li>
+				<li><a href="<?php echo $base_url?>great-gift-ideas/women.html">Gifts for Her</a></li>
+				<li><a href="<?php echo $base_url?>great-gift-ideas/kids.html">Gifts for Kids</a></li>
+				<li><a href="<?php echo $base_url?>/great-gift-ideas/unisex.html">Gifts for Unisex</a></li>
+				<li><a href="<?php echo $base_url?>/great-gift-ideas.html?price=-25">Gifts under $25</a></li>
+				<li><a href="<?php echo $base_url?>/great-gift-ideas.html?price=-50">Gifts under $50</a></li>
+				</ul>
+			</div>
+		</div>
+		<a href="<?php echo $base_url?>top-brands" class="jtopbrand"><h6 class="block-title heading foo-color">Top Brands</h6></a>
+			<a href="<?php echo $base_url?>new-arrivals.html" class="jtopbrand"><h6 class="block-title heading foo-color">New Arrivals</h6></a>
+			<a href="<?php echo $base_url?>best-seller.html" class="jtopbrand"><h6 class="block-title heading foo-color">Best Seller </h6></a>
+			<a href="<?php echo $base_url?>editor-s-pick.html" class="jtopbrand"><h6 class="block-title heading foo-color">Editor's Pick </h6></a>
+			<a href="<?php echo $base_url?>sale.html" class="jtopbrand"><h6 class="block-title heading foo-color">Sale</h6></a>
+	</div>

@@ -1,0 +1,95 @@
+<style>
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+</style>
+
+
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'Upload')">Upload</button>
+  <button class="tablinks" onclick="openCity(event, 'Download')">Download</button>
+</div>
+
+<div id="Upload" class="tabcontent">
+  <form action="<?php echo $block->getadminurl() ?>/pwwfilemanager/filemanager/uploads" method="post" enctype="multipart/form-data">
+   <input name="form_key" type="hidden" value="<?php echo $block->getFormKey() ?>">
+    <input type="file" name="fileToUpload" id="fileToUpload" accept=".csv" >
+    <div class="custom-select">
+     <select name="file_type"> 
+  <option value="size">size</option>
+  <option value="gender">gender</option>
+  <option value="designer">designer</option>
+</select>
+</div> 
+    <input type="submit" value="Upload" name="submit" class="c_m_submit">
+</form>
+</div>
+
+<div id="Download" class="tabcontent">
+  <form action="<?php echo $block->getadminurl() ?>/pwwfilemanager/filemanager/download" method="post">
+   <input name="form_key" type="hidden" value="<?php echo $block->getFormKey() ?>">
+    <div class="custom-select">
+     <select name="file_type"> 
+  <option value="size">size</option>
+  <option value="gender">gender</option>
+  <option value="designer">designer</option>
+</select>
+</div> 
+    <input type="submit" value="Download" name="submit" class="c_m_submit">
+</form>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Pww_Filemanager/js/filemanager":{}
+        }
+    }        
+</script>
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>

@@ -1,0 +1,23 @@
+<?php  
+$most_viewed = $block->getCollection();
+$i=0;
+?>
+<div class="today_wrap grid12-12">
+	<span class="search-term-head grid12-3">TODAY’S POPULAR SEARCHES:</span> 
+	<ul>
+		<?php foreach($most_viewed as $item) { 
+			?>
+		<li><a href="<?php echo $item->getUrlInStore(); ?>"><?php echo substr($item->getSku(),0,25); ?>..</a>&nbsp;&nbsp;</li>
+		<?php   
+		        $i = $i + 1;
+				if($i == 4)
+				{
+					break;
+				}
+				else{
+					continue;
+				}
+		} ?>
+	</ul>
+</div>
+

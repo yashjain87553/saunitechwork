@@ -1,0 +1,418 @@
+<?php
+// @codingStandardsIgnoreFile
+$type=$block->getRegistryType();
+?>
+<?php
+/** @var $block  \Magenest\GiftRegistry\Block\Customer\Registry\NewRegistry */
+$baseUrl = $block->getBaseUrl();
+$events_id = $block->getOwnerId();
+
+
+$eventTypeCollection = $block->getActiveEventType();
+$addressCollection = $block->getShippingAddress();
+
+$addressArr = $block->getCustomerAddress();
+
+$editEvent = $block->getGiftRegistry();
+
+$gift_option=json_decode($editEvent->getData('gift_options'));
+$gift_option =  (array) $gift_option;
+$type = $block->getRegistryType();
+$dateTimeObj = new \DateTime($editEvent->getData('date'));
+
+$usDateFormat = $dateTimeObj->format('m-d-Y');
+$editMode = false;
+if ($editEvent->getId())
+    $editMode = true;
+?>
+<form method="post" data-mage-init='{"validation": {}}' autocomplete="off" action="<?php echo $baseUrl?>giftregistrys/customer/post" name="giftregistry_add_form" id="giftregistry_add_form">
+    <div class="baby-back-ground" style="position: relative;">
+        <div class="my-float-left content">
+            <div class="title">
+                <h1><?php echo __('Let\'s get started!')?></h1>
+            </div>
+            <div class="my-line"></div>
+            <div class="group-fieldset">
+                <?php
+                if($type=='babygift'){
+                    include ($block->getTemplateFile('Magenest_GiftRegistry::registry/new/new_babygift.phtml'));
+                }else if($type=='weddinggift')
+                {
+                    include ($block->getTemplateFile('Magenest_GiftRegistry::registry/new/new_weddinggift.phtml'));
+                }else if($type=='birthdaygift')
+                {
+                    include ($block->getTemplateFile('Magenest_GiftRegistry::registry/new/new_birthdaygift.phtml'));
+                }else if($type=='christmasgift')
+                {
+                    include ($block->getTemplateFile('Magenest_GiftRegistry::registry/new/new_christmas.phtml'));
+                }
+                ?>
+                <fieldset class="fieldset">
+
+                    <h2 class="legend"><?php echo __("General Information")  ?> </h2>
+                    <input type="hidden" name="type" value="<?php echo $type ?>">
+                    <div class="field">
+                        <label for="title" class="required label"><?php  echo __("Title") ?></label>
+                        <div class="input-box">
+                            <input type="text" class="background-none" name="title" value=""/>
+                        </div>
+                    </div>
+                    <div class="field required">
+                        <div class="panel-heading label"><?php echo __('Date ') ?></div>
+                        <div class="panel-body">
+                            <input name="date" data-validate="{required:true}" id="date" class="background-none"  data-role="date-picker" class="picker" type="text" readonly value="<?php echo $usDateFormat ?>"/> <span class="date-icon"></span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="location" class="required label"><?php  echo __("Location") ?></label>
+                        <div class="input-box">
+                            <input type="text" id="pac-input" name="location" class="background-none"/>
+                        </div>
+                        <div id="type-selector" class="pac-controls">
+                            <input type="radio" id="changetype-all" name="autocomplete_type" checked="checked">
+                            <label for="changetype-all">All</label>
+
+                            <input type="radio" name="autocomplete_type" id="changetype-establishment">
+                            <label for="changetype-establishment">Establishments</label>
+
+                            <input type="radio" name="autocomplete_type" id="changetype-address">
+                            <label for="changetype-address">Addresses</label>
+
+                            <input type="radio" name="autocomplete_type" id="changetype-geocode">
+                            <label for="changetype-geocode">Geocodes</label>
+                        </div>
+                        <div id="strict-bounds-selector"  class="pac-controls">
+                            <input type="checkbox" id="use-strict-bounds" value="">
+                            <label for="use-strict-bounds">Strict Bounds</label>
+                        </div>
+                        <div id="map"></div>
+                        <div id="infowindow-content">
+                            <img src="" width="16" height="16" id="place-icon">
+                            <span id="place-name"  class="title"></span><br>
+                            <span id="place-address"></span>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="description" class="required label"><?php  echo __("Description") ?></label>
+                        <div class="input-box">
+                            <textarea name="description" ></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="fieldset">
+                    <h2 class="legend"><?php echo __("Registrant Information")  ?> </h2>
+                    <div class="field required">
+                        <label for="firstName" class="required label"><?php echo __("First Name")  ?></label>
+                        <div class="input-box">
+                            <input type="text" data-validate="{required:true}" class="background-none"  value="" name="registrant[0][firstname]" title="<?php echo __("First Name")  ?>" id="firstName" class="input-text required-entry">
+                        </div>
+                    </div>
+                    <div class="field required">
+                        <label for="lastname" class="required label"><?php echo __("Last name")  ?> </label>
+                        <div class="input-box">
+                            <input type="text" data-validate="{required:true}" class="background-none"  value="" name="registrant[0][lastname]" title="<?php echo __("Last name")  ?>" id="lastName" class="input-text required-entry">
+                        </div>
+                    </div>
+                    <div class="field required">
+                        <label for="email" class="required label"><?php echo __("Email") ?> </label>
+                        <div class="input-box">
+                            <input type="email" data-validate="{required:true,'validate-email':true}" class="background-none"  value=""  name="registrant[0][email]" title="<?php echo __('Email')?>" id="email" class="input-text required-entry">
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="fieldset">
+                    <h2 class="legend"> <?php echo __('Privacy') ?></h2>
+                    <div class="field required">
+                        <label  for="password" class="label"><?php echo __('Privacy mode') ?></label>
+                        <div class="control">
+                            <select id="select-privacy" class="select" name="privacy" data-validate="{required:true}" data-role="defined-selected">
+                                <option value=""><?php echo __('Select a privacy mode...')  ?></option>
+                                <option value="private"> <?php echo __("Private")  ?></option>
+                                <option value="public"> <?php  echo __("Public")  ?></option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--                    <div class="field" id="password-primacy" hidden>-->
+                    <div class="field required password-field" hidden>
+                        <label for="password" class="required label"><?php echo __("Password") ?></label>
+                        <!--                            <div class="input-box">-->
+                        <input type="password" data-validate="{required:true, 'validate-password':true}" id="password"
+                               class="input-text" title="<?php echo __("Password") ?>" value="" name="password">
+                        <!--                            </div>-->
+                    </div>
+                    <div class="field required password-field" hidden>
+                        <label for="re_password" class="required label"><?php echo __("Confirm Password") ?></label>
+                        <!--                            <div class="input-box">-->
+                        <input type="password" data-validate="{equalTo:'#password'}" id="re_password"
+                               class="input-text" title="<?php echo __("Confirm Password") ?>" value=""
+                               name="re_password">
+                        <!--                            </div>-->
+                        <label style="color:red;" hidden id="check_password_label" class="label">
+                            <?php echo __('Password and repassword must match!') ?></label>
+                    </div>
+                    <!--                    </div>-->
+                </fieldset>
+                <fieldset class="fieldset">
+                    <div class="field choice">
+                        <input type="checkbox" id="show_in_search_result" name="show_in_search" class="checkbox" title="<?php echo __("Show in search result") ?>" >
+                        <label  class ="label" for="show_in_search"><?php echo __("Show in search result") ?></label>
+                    </div>
+                    <div class="fieldset required">
+                        <h2 class="legend"><?php echo __("Shipping Address Information")  ?> </h2>
+                        <div class="field required">
+                            <label for="shipping_address" class="required label"><?php echo __("Shipping Address")  ?> </label>
+                            <div class="control">
+                                <select name="shipping_address" id="shipping_address" data-validate="{required:true,'required-entry':true}" data-role="defined-selected" data-action="add-new-shipping-address" data-roles="shipping-add" data-role="defined-selected"  data-myvalue="<?php echo $editEvent->getData('shipping_address')?>">
+                                    <option value=""><?php echo __('Select an address...')  ?></option>
+                                    <?php if ($addressArr) {
+                                        foreach ($addressArr as $address) {
+                                            ?>
+                                            <option value="<?php echo $address['id'] ?>"><?php echo $address['name'] ?></option>
+                                        <?php  } }?>
+                                    <option data-action="add-new-shipping-address" value="new"><?php echo __("Add new address...") ?></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="primary">
+                <button id="btn_submit_gift" type="button" style="display: block" class="action btn_save primary" data-action="save-address" title="<?php echo __("Save") ?>">
+                    <span><?php echo __("Save Your Gift") ?></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<div style="display: none">
+    <div data-role="wrapper-modal-new-email"  class="create-new-marketing-email full-height">
+        <?php
+        echo $block->getBlockHtml("giftregistry.address");
+        ?>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "#giftregistry_add_form": {
+            "validation": {}
+        }
+    }
+</script>
+<script>
+    // This example requires the Places library. Include the libraries=places
+    // parameter when you first load the API. For example:
+    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: -33.8688, lng: 151.2195},
+            zoom: 13
+        });
+
+        // lat & long to address
+        function loadAddress(lat, lng) {
+            var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+lng+'&key=AIzaSyAqH83QqletUOJXv14oLfl76kcEAW29vhw';
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var address = JSON.parse(this.responseText);
+                    document.getElementsByName("location")[0].value = address['results'][0]['formatted_address'];
+                }
+            };
+            xhttp.open("GET", url, true);
+            xhttp.send();
+        }
+        google.maps.event.addListener(map, 'click', function( event ){
+            loadAddress(event.latLng.lat(), event.latLng.lng());
+        });
+
+        var card = document.getElementById('pac-card');
+        var input = document.getElementById('pac-input');
+
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+
+        // Bind the map's bounds (viewport) property to the autocomplete object,
+        // so that the autocomplete requests use the current map bounds for the
+        // bounds option in the request.
+        autocomplete.bindTo('bounds', map);
+
+        var infowindow = new google.maps.InfoWindow();
+        var infowindowContent = document.getElementById('infowindow-content');
+        infowindow.setContent(infowindowContent);
+        var marker = new google.maps.Marker({
+            map: map,
+            anchorPoint: new google.maps.Point(0, -29)
+        });
+
+        autocomplete.addListener('place_changed', function() {
+            infowindow.close();
+            marker.setVisible(false);
+            var place = autocomplete.getPlace();
+            if (!place.geometry) {
+                // User entered the name of a Place that was not suggested and
+                // pressed the Enter key, or the Place Details request failed.
+                window.alert("No details available for input: '" + place.name + "'");
+                return;
+            }
+
+            // If the place has a geometry, then present it on a map.
+            if (place.geometry.viewport) {
+                map.fitBounds(place.geometry.viewport);
+            } else {
+                map.setCenter(place.geometry.location);
+                map.setZoom(17);  // Why 17? Because it looks good.
+            }
+            marker.setPosition(place.geometry.location);
+            marker.setVisible(true);
+
+            var address = '';
+            if (place.address_components) {
+                address = [
+                    (place.address_components[0] && place.address_components[0].short_name || ''),
+                    (place.address_components[1] && place.address_components[1].short_name || ''),
+                    (place.address_components[2] && place.address_components[2].short_name || '')
+                ].join(' ');
+            }
+
+            infowindowContent.children['place-icon'].src = place.icon;
+            infowindowContent.children['place-name'].textContent = place.name;
+            infowindowContent.children['place-address'].textContent = address;
+            infowindow.open(map, marker);
+        });
+
+        // Sets a listener on a radio button to change the filter type on Places
+        // Autocomplete.
+        function setupClickListener(id, types) {
+            var radioButton = document.getElementById(id);
+            radioButton.addEventListener('click', function() {
+                autocomplete.setTypes(types);
+            });
+        }
+
+        setupClickListener('changetype-all', []);
+        setupClickListener('changetype-address', ['address']);
+        setupClickListener('changetype-establishment', ['establishment']);
+        setupClickListener('changetype-geocode', ['geocode']);
+
+        document.getElementById('use-strict-bounds')
+            .addEventListener('click', function() {
+                console.log('Checkbox clicked! New state=' + this.checked);
+                autocomplete.setOptions({strictBounds: this.checked});
+            });
+
+        navigator.geolocation.getCurrentPosition(function(position){
+            var currentLatitude = position.coords.latitude;
+            var currentLongitude = position.coords.longitude;
+            var infoWindow = new google.maps.InfoWindow({map: map});
+            var currentLocation = { lat: currentLatitude, lng: currentLongitude };
+            infoWindow.setPosition(currentLocation);
+            var geocoder = new google.maps.Geocoder;
+            var latlng = {lat: parseFloat(currentLatitude), lng: parseFloat(currentLongitude)};
+
+            geocoder.geocode({'location': latlng}, function(results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        var service = new google.maps.places.PlacesService(map);
+                        service.getDetails({
+                            placeId: results[1].place_id
+                        }, function(place, status) {
+                            document.getElementById('pac-input').value = place.formatted_address;
+                            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                                var marker = new google.maps.Marker({
+                                    map: map,
+                                    position: place.geometry.location
+                                });
+                                google.maps.event.addListener(marker, 'click', function() {
+                                    infowindow.open(map, this);
+                                });
+                                infoWindow.setContent(place.formatted_address);
+                            }
+                        });
+                    } else {
+                        window.alert('No results found');
+                    }
+                } else {
+                    window.alert('Geocoder failed due to: ' + status);
+                }
+            });
+        });
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqH83QqletUOJXv14oLfl76kcEAW29vhw&libraries=places&callback=initMap"
+        async defer>
+</script>
+<script type="text/javascript">
+    require([
+        'jquery',
+        'mage/mage'
+    ], function($){
+        $("#select-privacy").val('select_privacy');
+        var dataForm = $('#giftregistry_add_form');
+        dataForm.mage('validation', {});
+    });
+</script>
+<script type="text/javascript" >
+    require([
+        "jquery",
+        "Magenest_GiftRegistry/js/addressChosen",
+        "mage/calendar",
+        "domReady!"
+    ], function ($,addressChosen, domReady) {
+
+        $('input[data-role="date-picker"]').calendar({ dateFormat: 'mm-dd-yy' });
+
+        var addressChosen = new addressChosen({ updateOption:true,getAddressUrl:'<?php echo $block->getUrl('giftregistrys/customer/address')?>'});
+
+        $(document).ready(function() {
+            $('select[data-role="defined-selected"]').each(function() {
+                var realValue = $(this).data('myvalue');
+                $(this).val(realValue);
+            }) ;
+        })
+        $('select[data-role="defined-selected"]').change(function() {
+            var primacy = $('option:selected' , this).val();
+            if(primacy == 'private')
+            {
+                $('.password-field').show();
+            }else if(primacy == 'public')
+            {
+                $('.password-field').hide();
+                $('#re_password').val('');
+                $('#password').val('');
+            }
+        });
+        $('#re_password').keyup(function () {
+            if($('#re_password').val() != $('#password').val()) {
+                $('#check_password_label').show();
+            } else {
+                $('#check_password_label').hide();
+            }
+        });
+        $('#btn_submit_gift').click(function () {
+            if($('#re_password').val() != $('#password').val()) {
+                $('#check_password_label').show();
+            } else {
+                var form = $('#giftregistry_add_form');
+                form.validate();
+                if (form.valid()) {
+                    $('#giftregistry_add_form').submit();
+                }
+            }
+        });
+    });
+</script>
+<script>
+    require([
+        "jquery",
+        "mage/calendar"
+    ], function ($) {
+
+        $("#date").calendar({
+            minDate: new Date(),
+            dateFormat: 'mm-dd-yy'
+        });
+    });
+</script>

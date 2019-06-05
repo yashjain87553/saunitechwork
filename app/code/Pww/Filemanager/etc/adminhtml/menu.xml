@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+    	<add id="Pww_Filemanager::fileuploader" title="File Manager" module="Pww_Filemanager" sortOrder="50" resource="Pww_Filemanager::fileuploader"/>
+        <add id="Pww_Filemanager::filemanager" title="Add Attribute Values" module="Pww_Filemanager" sortOrder="55" parent="Pww_Filemanager::fileuploader" action="pwwfilemanager/filemanager" resource="Pww_Filemanager::fileuploader" />
+    </menu>
+</config>

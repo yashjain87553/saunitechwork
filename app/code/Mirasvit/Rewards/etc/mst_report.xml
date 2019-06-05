@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../module-report/src/ReportApi/etc/mst_report.xsd">
+    <table name="mst_rewards_points_aggregated_hour">
+        <fk name="customer_id" table="customer_entity"/>
+
+        <column name="period" label="Purchased On" type="date"/>
+
+        <column name="store_id" label="Store" type="store"/>
+        <column name="customer_group_id" label="Customer Groups" type="select" options="Magento\Customer\Model\ResourceModel\Group\Collection"/>
+
+        <column name="total_points_earned" label="Earned Points" type="number"/>
+        <column name="total_points_spent" label="Spent Points" type="number"/>
+        <column name="total_points_spent_in_money" label="Total Spent Points in money equivalent" type="money"/>
+        <column name="total_expired_points" label="Expired Points" type="number"/>
+    </table>
+</config>

@@ -1,0 +1,495 @@
+"My Reward Points","My Reward Points"
+"Reward Points","Reward Points"
+"Rewards Information","Rewards Information"
+"Available Points Balance","Available Points Balance"
+"Change Balance","Change Balance"
+"Enter positive or negative number of points. E.g. 10 or -10","Enter positive or negative number of points. E.g. 10 or -10"
+"Message in the rewards history","Message in the rewards history"
+"Customer will see this in his account","Customer will see this in his account"
+"No Records Found","No Records Found"
+ID,ID
+"Balance Change","Balance Change"
+Comment,Comment
+"Created At","Created At"
+"Expires At","Expires At"
+"Apply the rule only to cart items matching the following conditions (leave blank for all items)","Apply the rule only to cart items matching the following conditions (leave blank for all items)"
+"Apply To","Apply To"
+"Apply the rule only if the following conditions are met (leave blank for all products)","Apply the rule only if the following conditions are met (leave blank for all products)"
+Conditions,Conditions
+"Earning Rules","Earning Rules"
+"Spending Rules","Spending Rules"
+"Notification Rules","Notification Rules"
+Transactions,Transactions
+"Customer Referrals","Customer Referrals"
+Reports,Reports
+"Refresh Statistics","Refresh Statistics"
+Settings,Settings
+Save,Save
+Delete,Delete
+"Save And Continue Edit","Save And Continue Edit"
+"Edit Referral '%1'","Edit Referral '%1'"
+"Create New Referral","Create New Referral"
+"Customer Name","Customer Name"
+"Customer Email","Customer Email"
+"Customer Group","Customer Group"
+Action,Action
+Code,Code
+"Is expired","Is expired"
+"Is sent","Is sent"
+"Amount Used","Amount Used"
+"Are you sure?","Are you sure?"
+"Checkout now and earn <b>%1</b> for this order.","Checkout now and earn <b>%1</b> for this order."
+"Applies only to registered customers, may vary when logged in.","Applies only to registered customers, may vary when logged in."
+"Possible discount %1 %2","Possible discount %1 %2"
+"Earn %1 %2","Earn %1 %2"
+Grid,Grid
+List,List
+All,All
+"Referral %1","Referral %1"
+"Something went wrong while saving your subscription.","Something went wrong while saving your subscription."
+"We removed your subscription on expiring points notification.","We removed your subscription on expiring points notification."
+"New Earning Rule","New Earning Rule"
+"Earning Rule was successfully deleted","Earning Rule was successfully deleted"
+"Edit Earning Rule '%1'","Edit Earning Rule '%1'"
+"The Earning Rule does not exist.","The Earning Rule does not exist."
+"Total of %1 record(s) were successfully updated","Total of %1 record(s) were successfully updated"
+"Please select Earning Rule(s)","Please select Earning Rule(s)"
+"Total of %1 record(s) were successfully deleted","Total of %1 record(s) were successfully deleted"
+"Earning Rule was successfully saved","Earning Rule was successfully saved"
+"Unable to find Earning Rule to save","Unable to find Earning Rule to save"
+"New Notification Rule","New Notification Rule"
+"Notification Rule was successfully deleted","Notification Rule was successfully deleted"
+"Edit Notification Rule '%1'","Edit Notification Rule '%1'"
+"The Notification Rule does not exist.","The Notification Rule does not exist."
+"Please select Notification Rule(s)","Please select Notification Rule(s)"
+"Notification Rule was successfully saved","Notification Rule was successfully saved"
+"Unable to find Notification Rule to save","Unable to find Notification Rule to save"
+"Please select Referral(s)","Please select Referral(s)"
+"Statistics was successfully updated","Statistics was successfully updated"
+"Database error. Please contact developers.","Database error. Please contact developers."
+Rewards,Rewards
+"You have not any statistic. Please refresh statistic.","You have not any statistic. Please refresh statistic."
+"New Spending Rule","New Spending Rule"
+"Spending Rule was successfully deleted","Spending Rule was successfully deleted"
+"Edit Spending Rule '%1'","Edit Spending Rule '%1'"
+"The Spending Rule does not exist.","The Spending Rule does not exist."
+"Please select Spending Rule(s)","Please select Spending Rule(s)"
+"Field 'Spend maximum' can not be less or equal then field 'Spend minimum'","Field 'Spend maximum' can not be less or equal then field 'Spend minimum'"
+"Spending Rule was successfully saved","Spending Rule was successfully saved"
+"Unable to find Spending Rule to save","Unable to find Spending Rule to save"
+"New Transaction","New Transaction"
+"Transaction was successfully deleted","Transaction was successfully deleted"
+"Please select Transaction(s)","Please select Transaction(s)"
+"Transaction was successfully saved","Transaction was successfully saved"
+"Unable to find Transaction to save","Unable to find Transaction to save"
+"Cannot apply points.","Cannot apply points."
+"You've earned %1 for Facebook Like!","You've earned %1 for Facebook Like!"
+"You've earned %1 for Facebook Share!","You've earned %1 for Facebook Share!"
+"Facebook Like Points has been canceled","Facebook Like Points has been canceled"
+"You've earned %1 for Google+!","You've earned %1 for Google+!"
+"G+1 Points has been canceled","G+1 Points has been canceled"
+"You've earned %1 for Pin!","You've earned %1 for Pin!"
+"Invalid form key. Try again","Invalid form key. Try again"
+"Customer with email %1 has been already invited to our store","Customer with email %1 has been already invited to our store"
+"Your invitations were sent. Thanks!","Your invitations were sent. Thanks!"
+"You've earned %1 for Tweet!","You've earned %1 for Tweet!"
+"You received %1 for signing up","You received %1 for signing up"
+"You received %1 for sending this product","You received %1 for sending this product"
+"You received %1 for sign up for newsletter","You received %1 for sign up for newsletter"
+"You received %1 for sign up for push notifications","You received %1 for sign up for push notifications"
+"You will receive %1 after approving of this tag","You will receive %1 after approving of this tag"
+"You will receive %1 after approving of this review","You will receive %1 after approving of this review"
+"You received %1 for sign up of referral customer.","You received %1 for sign up of referral customer."
+"You received %1 for order of referral customer.","You received %1 for order of referral customer."
+"Happy birthday! You received %1.","Happy birthday! You received %1."
+"You received %1 for joining the affiliate program.","You received %1 for joining the affiliate program."
+"%1 were applied.","%1 were applied."
+"Minimum number is %1.","Minimum number is %1."
+"Maximum number is %1.","Maximum number is %1."
+"%1 was canceled.","%1 was canceled."
+"Cannot apply %1.","Cannot apply %1."
+"You can use the following variables:","You can use the following variables:"
+Pattern,Pattern
+"Attribute Value","Attribute Value"
+Default,Default
+Integer,Integer
+Price,Price
+"Strip Tags","Strip Tags"
+"Primary Attributes","Primary Attributes"
+"Stock Attributes","Stock Attributes"
+"Prices & Taxes","Prices & Taxes"
+Images,Images
+"Custom Attributes","Custom Attributes"
+Mapping,Mapping
+Category,Category
+"Amasty Meta Tags","Amasty Meta Tags"
+"Others Attributes","Others Attributes"
+Flexible,Flexible
+Fixed,Fixed
+"Customer signs up in store","Customer signs up in store"
+"Customer places order","Customer places order"
+"Customer refer a friend","Customer refer a friend"
+"Customer adds tag to a product","Customer adds tag to a product"
+"Customer writes a product review","Customer writes a product review"
+"Customer has a birthday","Customer has a birthday"
+"Customer is inactive for long time","Customer is inactive for long time"
+"Newsletter sign up","Newsletter sign up"
+"Facebook Share","Facebook Share"
+"Facebook Like","Facebook Like"
+"Twitter Tweet","Twitter Tweet"
+"Google+ Like","Google+ Like"
+"Pinterest Pin","Pinterest Pin"
+"Customer joins the affiliate program","Customer joins the affiliate program"
+"Push Notifications sign up","Push Notifications sign up"
+"Referred customer signs up in store","Referred customer signs up in store"
+"Order from referred customer","Order from referred customer"
+"Points to Currency","Points to Currency"
+"Currency to Points","Currency to Points"
+"Customer Account > My Reward Points","Customer Account > My Reward Points"
+"Customer Account > My Referrals","Customer Account > My Referrals"
+"Cart Page","Cart Page"
+"Message Sent","Message Sent"
+"Signed Up","Signed Up"
+"Made Order","Made Order"
+"Visited by Referral Link","Visited by Referral Link"
+"Subtotal + Tax","Subtotal + Tax"
+"Subtotal + Tax + Shipping","Subtotal + Tax + Shipping"
+"Product Rule","Product Rule"
+"Cart Rule","Cart Rule"
+"Behavior Rule","Behavior Rule"
+"Transaction #%1 is expired","Transaction #%1 is expired"
+"Update the Product","Update the Product"
+"Is Rewards Points used","Is Rewards Points used"
+"Coupon Used","Coupon Used"
+"Coupon Code","Coupon Code"
+No,No
+Yes,Yes
+"Conditions Combination","Conditions Combination"
+"Product attribute combination","Product attribute combination"
+"Products subselection","Products subselection"
+"Conditions combination","Conditions combination"
+"Cart Attribute","Cart Attribute"
+Customer,Customer
+"Last 7-days Clicks","Last 7-days Clicks"
+"Last 7-days Orders","Last 7-days Orders"
+"Last 7-days Revenue","Last 7-days Revenue"
+"Is Referee","Is Referee"
+"Is Referral","Is Referral"
+Email,Email
+Group,Group
+"Lifetime Sales","Lifetime Sales"
+"Lifetime Spent Points","Lifetime Spent Points"
+"Number of Orders","Number of Orders"
+"Is subscriber of newsletter","Is subscriber of newsletter"
+"Number of reviews","Number of reviews"
+"Number of referred friends signups","Number of referred friends signups"
+"Number of referred friends orders","Number of referred friends orders"
+"Sum of referred friends orders","Sum of referred friends orders"
+"Number of referrals who ordered at least once","Number of referrals who ordered at least once"
+"Not registered","Not registered"
+"Attribute Set","Attribute Set"
+Quantity,Quantity
+"Product Type","Product Type"
+"Base Image","Base Image"
+Thumbnail,Thumbnail
+"Small Image","Small Image"
+"Base Image Size (bytes)","Base Image Size (bytes)"
+"Thumbnail Size (bytes)","Thumbnail Size (bytes)"
+"Small Image Size (bytes)","Small Image Size (bytes)"
+"PHP Condition","PHP Condition"
+"Base Price","Base Price"
+"Final Price","Final Price"
+"Special Price","Special Price"
+"Open Chooser","Open Chooser"
+"Referred: Group","Referred: Group"
+"Referred: Lifetime Sales","Referred: Lifetime Sales"
+"Referred: Number of Orders","Referred: Number of Orders"
+"Referred: Is subscriber of newsletter","Referred: Is subscriber of newsletter"
+"Referred: Number of reviews","Referred: Number of reviews"
+"Please specify a website.","Please specify a website."
+"Please specify a customer email.","Please specify a customer email."
+"We found an invalid value in a website column.","We found an invalid value in a website column."
+"Please enter a valid email.","Please enter a valid email."
+"Please make sure attribute ""%1"" is not empty.","Please make sure attribute ""%1"" is not empty."
+"We can't find a customer who matches this email and website code.","We can't find a customer who matches this email and website code."
+"-- Please Select --","-- Please Select --"
+"Discount Used","Discount Used"
+"Custom Product Attributes","Custom Product Attributes"
+"- Disable these emails -","- Disable these emails -"
+"Give X points to customer","Give X points to customer"
+"Give X points for every spent Y","Give X points for every spent Y"
+"Give X points for every Z quantity","Give X points for every Z quantity"
+"For every Y, give X points","For every Y, give X points"
+Pending,Pending
+Approved,Approved
+Discarded,Discarded
+"You do not have permissions to create transactions. Please contact your site administrator.","You do not have permissions to create transactions. Please contact your site administrator."
+"%1 has been added.","%1 has been added."
+"%1 has been deducted.","%1 has been deducted."
+"You earned %1 and spent %2 for this order.","You earned %1 and spent %2 for this order."
+"You spent %1 for this order.","You spent %1 for this order."
+"You earned %1 for this order.","You earned %1 for this order."
+"Earned points will be enrolled to your account after we finish processing your order.","Earned points will be enrolled to your account after we finish processing your order."
+"Rewards error occurred on the server. Please try to place the order again.","Rewards error occurred on the server. Please try to place the order again."
+"Earn at least %1 %2","Earn at least %1 %2"
+Edit,Edit
+Back,Back
+"Are you sure you want to do this?","Are you sure you want to do this?"
+Reset,Reset
+"Save and Continue Edit","Save and Continue Edit"
+"Delete the record with ID ""${ $.$data.transaction_id }""","Delete the record with ID ""${ $.$data.transaction_id }"""
+"Are you sure you wan't to delete the record with ID ""${ $.$data.transaction_id }""?","Are you sure you wan't to delete the record with ID ""${ $.$data.transaction_id }""?"
+"Use Reward Points","Use Reward Points"
+"%1 have <b>%2</b> available.","%1 have <b>%2</b> available."
+"Enter amount of points to spend:","Enter amount of points to spend:"
+"Apply Points","Apply Points"
+"Cancel Points","Cancel Points"
+"Use maximum %1","Use maximum %1"
+"Points Summary","Points Summary"
+"To unsubscribe from points expiring notification click %1","To unsubscribe from points expiring notification click %1"
+"You have <b>%1</b> in your account.","You have <b>%1</b> in your account."
+"Transactions History","Transactions History"
+Points,Points
+Created,Created
+Expires,Expires
+"There are no Transactions.","There are no Transactions."
+"Pending Transactions","Pending Transactions"
+Order,Order
+Status,Status
+"Your points balance will expire in %1 days.","Your points balance will expire in %1 days."
+"Visit My Reward Points Section","Visit My Reward Points Section"
+"Login to earn %1 for sharing!","Login to earn %1 for sharing!"
+"Earn %1 for sharing!","Earn %1 for sharing!"
+"Like this page and earn %1","Like this page and earn %1"
+Share,Share
+"Share this page and earn %1","Share this page and earn %1"
+"Plus this page and earn %1","Plus this page and earn %1"
+"Pin this page and earn %1","Pin this page and earn %1"
+"Refer Friends","Refer Friends"
+"Refer friend and earn %1. More friends more points!","Refer friend and earn %1. More friends more points!"
+Tweet,Tweet
+"Tweet this page and earn %1","Tweet this page and earn %1"
+"Check this out!","Check this out!"
+"You have <b>%1</b> available.","You have <b>%1</b> available."
+Apply,Apply
+Cancel,Cancel
+"Use %1","Use %1"
+"You Earn","You Earn"
+"You Spend","You Spend"
+"Discount amount","Discount amount"
+"This is a required field","This is a required field"
+"Subscription to Points Expiration Notification","Subscription to Points Expiration Notification"
+"Earning %1","Earning %1"
+"Buy to earn %1","Buy to earn %1"
+"You'll earn %1 for this item","You'll earn %1 for this item"
+"Share with Friends","Share with Friends"
+"Share the referral link in the social media and get points!","Share the referral link in the social media and get points!"
+"Tweet on Twitter","Tweet on Twitter"
+"Your referral link:","Your referral link:"
+"Send Invitations","Send Invitations"
+"Enter contacts of your friends to invite them.","Enter contacts of your friends to invite them."
+Name,Name
+Message,Message
+Referrals,Referrals
+"Referred by link","Referred by link"
+"There are no Referrals","There are no Referrals"
+"You have","You have"
+available.,available.
+"Use maximum","Use maximum"
+"Enter amount of points to spend","Enter amount of points to spend"
+Use,Use
+"Point Unit Name","Point Unit Name"
+"Reward points expire after, days","Reward points expire after, days"
+"Approve earned points on invoice","Approve earned points on invoice"
+"Approve earned points on shipment","Approve earned points on shipment"
+"Approve earned points if order has status","Approve earned points if order has status"
+"Cancel earned points after order refunding","Cancel earned points after order refunding"
+"Restore spent points after order refunding","Restore spent points after order refunding"
+"Include discount for Earning rules","Include discount for Earning rules"
+"Include tax for Earning rules","Include tax for Earning rules"
+"Include tax for Spending rules","Include tax for Spending rules"
+"Allow to earn points from shipping charges","Allow to earn points from shipping charges"
+"Allow to spend points for shipping charges","Allow to spend points for shipping charges"
+"Allow to place orders with grand total = 0","Allow to place orders with grand total = 0"
+"Allow to display product points as currency equivalent","Allow to display product points as currency equivalent"
+"Allow to display maximum amount of possible points for configurable product","Allow to display maximum amount of possible points for configurable product"
+"Email Sender","Email Sender"
+"Balance update Email","Balance update Email"
+"Points expire Email","Points expire Email"
+"Send notification before points expiring (in days)","Send notification before points expiring (in days)"
+"Enable Referral System","Enable Referral System"
+"Invitation Email Template","Invitation Email Template"
+"Show rewards points menu on frontend","Show rewards points menu on frontend"
+"Show rewards points on category page","Show rewards points on category page"
+"Show number of points on the product page","Show number of points on the product page"
+"Show pending transactions in customer account","Show pending transactions in customer account"
+"Round earning points down","Round earning points down"
+"Custom Behavior Events","Custom Behavior Events"
+"Force to apply styles","Force to apply styles"
+"Social Networks Settings","Social Networks Settings"
+"Facebook App ID","Facebook App ID"
+"Show Facebook Like button","Show Facebook Like button"
+"Show Facebook Share button","Show Facebook Share button"
+"Show Twitter Follow button","Show Twitter Follow button"
+"Show Google Plus +1 button","Show Google Plus +1 button"
+"Show Pinterest pin button","Show Pinterest pin button"
+"Show AddThis","Show AddThis"
+"AddThis Code","AddThis Code"
+"Notification Rules' messages","Notification Rules' messages"
+Template,Template
+"Notification Rule Template","Notification Rule Template"
+Phone,Phone
+ZIP,ZIP
+Country,Country
+State/Province,State/Province
+"Customer Since","Customer Since"
+"Web Site","Web Site"
+"General Information","General Information"
+"Rule Name","Rule Name"
+Type,Type
+"Is Active","Is Active"
+"Active From","Active From"
+"Active To","Active To"
+Websites,Websites
+"Stop further rules processing","Stop further rules processing"
+Priority,Priority
+"Arranged in the ascending order. 0 is the highest.","Arranged in the ascending order. 0 is the highest."
+"Number of Inactive Days","Number of Inactive Days"
+Actions,Actions
+"Number of points to give (X)","Number of points to give (X)"
+"Step (Y)","Step (Y)"
+"In base currency","In base currency"
+"Quantity Step (Z)","Quantity Step (Z)"
+"Maximum number of earned points for one customer per day","Maximum number of earned points for one customer per day"
+"Assign customer to Group","Assign customer to Group"
+Notification,Notification
+"Message for customer notification email","Message for customer notification email"
+"You can use the following variables:<br/>
+                        {{var customer.name}} - customer name<br/>
+                        {{store url=""""}} - store URL<br/>
+                        {{var store.getFrontendName()}} - store name<br/>
+                        {{var transaction_amount}} - formatted amount of current transaction (e.g 10 Rewards Points)<br/>
+                        {{var balance_total}} - formatted balance of customer account (e.g. 100 Rewards Points)<br/>
+                        Leave empty to use default notification email.<br/>
+                        
+                    ","You can use the following variables:<br/>
+                        {{var customer.name}} - customer name<br/>
+                        {{store url=""""}} - store URL<br/>
+                        {{var store.getFrontendName()}} - store name<br/>
+                        {{var transaction_amount}} - formatted amount of current transaction (e.g 10 Rewards Points)<br/>
+                        {{var balance_total}} - formatted balance of customer account (e.g. 100 Rewards Points)<br/>
+                        Leave empty to use default notification email.<br/>
+                        
+                    "
+"Customer Earning Style","Customer Earning Style"
+"Number of Points (X)","Number of Points (X)"
+"Earn Maximum","Earn Maximum"
+"Add New","Add New"
+"Delete items","Delete items"
+"Delete selected items?","Delete selected items?"
+"Change status","Change status"
+Enable,Enable
+Disable,Disable
+"Number of points to earn","Number of points to earn"
+Website,Website
+"Maximum Distributed Points","Maximum Distributed Points"
+"You can use the following variables:<br/>
+                        {{var customer.name}} - customer name<br/>
+                        {{store url=""""}} - store URL<br/>
+                        {{var store.getFrontendName()}} - store name<br/>
+                        {{var balance_total}} - formatted balance of customer account (e.g. 100 Rewards Points)<br/>
+                        
+                    ","You can use the following variables:<br/>
+                        {{var customer.name}} - customer name<br/>
+                        {{store url=""""}} - store URL<br/>
+                        {{var store.getFrontendName()}} - store name<br/>
+                        {{var balance_total}} - formatted balance of customer account (e.g. 100 Rewards Points)<br/>
+                        
+                    "
+"Show message on","Show message on"
+"Affiliate Customer","Affiliate Customer"
+"Referral Customer","Referral Customer"
+"Referral Email","Referral Email"
+"Referral Name","Referral Name"
+Store,Store
+"For each spent X points","For each spent X points"
+"Customer receive Y discount","Customer receive Y discount"
+"You can enter amount in base currency or percent. e.g. 100 or 5%.","You can enter amount in base currency or percent. e.g. 100 or 5%."
+"Spend minimum","Spend minimum"
+"Spend maximum","Spend maximum"
+Discount,Discount
+"Points Balance Change","Points Balance Change"
+"You can use the following variables:<br>
+                        {{var customer.name}} - customer name<br>
+                        {{store url=""""}} - store URL<br>
+                        {{var store.getFrontendName()}} - store name<br>
+                        {{var transaction_amount}} - formatted amount of current transaction (e.g 10 Rewards Points)<br>
+                        {{var balance_total}} - formatted balance of customer account (e.g. 100 Rewards Points)<br>
+                        Leave empty to use default notification email.<br>
+                        
+                    ","You can use the following variables:<br>
+                        {{var customer.name}} - customer name<br>
+                        {{store url=""""}} - store URL<br>
+                        {{var store.getFrontendName()}} - store name<br>
+                        {{var transaction_amount}} - formatted amount of current transaction (e.g 10 Rewards Points)<br>
+                        {{var balance_total}} - formatted balance of customer account (e.g. 100 Rewards Points)<br>
+                        Leave empty to use default notification email.<br>
+                        
+                    "
+CSV,CSV
+"Excel XML","Excel XML"
+"Referrals List","Referrals List"
+"today","today"
+"ago","ago"
+"in %1 %2","in %1 days"
+"in %1 days","in %1 days"
+"in %1 day","in %1 days"
+"%1 %2 ago","%1 days ago"
+"%1 days ago","%1 days ago"
+"%1 day ago","%1 day ago"
+Expires,Expires
+"How to earn points","How to earn points"
+"You have invited %1 friends","You have invited %1 friends"
+"Share the referral link in the social media","Share the referral link in the social media"
+"Check this out!","Check this out!"
+"Tweet on Twitter","Tweet on Twitter"
+"You may send this link in your messages to anyone","You may send this link in your messages to anyone"
+"Page not found.","Page not found."
+"Customer tier up","Customer tier up"
+"Customer tier down","Customer tier down"
+"sum of earned points","sum of earned points"
+"sum of spent %1","sum of spent %1"
+"Customer does not assign to website","Customer does not assign to website"
+"Payment Method","Payment Method"
+"This tier is assign to %1 customer(s). Please reassign customer(s) to other tier.","This tier is assign to %1 customer(s). Please reassign customer(s) to other tier."
+"You Spend Points","You Spend Points"
+"Spend Amount","Spend Amount"
+"Spend Minimum Points","Spend Minimum Points"
+"Spend Maximum Points","Spend Maximum Points"
+"Cannot delete tier with id %1","Cannot delete tier with id %1"
+"Cannot delete transaction with id %1","Cannot delete transaction with id %1"
+"Unable to find tier for customer ""%1"". Please check tier configuration.","Unable to find tier for customer ""%1"". Please check tier configuration."
+"Set 0 to disable limit","Set 0 to disable limit"
+"Do not change","Do not change"
+"You can enter amount of points or percent. Leave empty to disable.","You can enter amount of points or percent. Leave empty to disable."
+Tiers,Tiers
+"%1 for each $%2","%1 for each $%2"
+"All Groups","All Groups"
+"Points spending style","Points spending style"
+"Number of points.","Number of points."
+"You can enter amount of points or percent. e.g. 100 or 5%. Leave empty to disable.","You can enter amount of points or percent. e.g. 100 or 5%. Leave empty to disable."
+"Minimum sum of spent %1","Minimum sum of spent %1"
+"Minimum points number to reach the tier","Minimum points number to reach the tier"
+"Delete the record with ID ""%1""","Delete the record with ID ""%1"""
+"Are you sure you wan't to delete the record with ID ""%1""?","Are you sure you wan't to delete the record with ID ""%1""?"
+"Spend points and receive discounts","Spend points and receive discounts"
+"Anonymous visitor","Anonymous visitor"
+"Or you may send this link in your messages to anyone","Or you may send this link in your messages to anyone"
+"Your current tier is <a href=""#"" class=""open-popup""><b>%1</b></a>","Your current tier is <a href=""#"" class=""open-popup""><b>%1</b></a>"
+"Earn <b>%1</b> to get to <a class=""open-popup""><b>%2</b></a>","Earn <b>%1</b> to get to <a class=""open-popup""><b>%2</b></a>"
+"Spend <b>%1</b> to get to <a class=""open-popup""><b>%2</b></a>","Spend <b>%1</b> to get to <a class=""open-popup""><b>%2</b></a>"
+"Your Transactions","Your Transactions"
+"My Points","My Points"
+"Share & Save","Share & Save"
+"My Referrals","My Referrals"
+History,History

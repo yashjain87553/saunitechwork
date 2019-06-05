@@ -1,0 +1,18 @@
+<?php
+// @codingStandardsIgnoreFile
+$link = $block->getViewFileUrl('/');
+?>
+<img class="img-back1" style="position: absolute;left: 800px;" src="<?php echo $block->getViewFileUrl('Magenest_GiftRegistry/images/new-gift/new-chismas1.jpeg') ?>" alt="">
+<img class="img-back2" style="position: absolute;top: 500px;left: 800px;" src="<?php echo $block->getViewFileUrl('Magenest_GiftRegistry/images/new-gift/new-chismas2.jpeg') ?>" alt="">
+<img class="img-back3" style="position: absolute;top: 910px;left: 800px;" src="<?php echo $block->getViewFileUrl('Magenest_GiftRegistry/images/new-gift/new-chismas3.jpeg') ?>" alt="">
+<fieldset class="fieldset">
+    <h2 class="legend"><?php echo __("About Christmas")  ?> </h2>
+    <input type="hidden" name="type" value="<?php echo $type  ?>">
+    <div class="field">
+        <div class="panel-heading label"><?php echo __('Add a greeting to friends and family at the top of your registry ') ?></div>
+        <div class="panel-body">
+            <textarea name="greeting" id="greeting" cols="30" rows="5" placeholder="You write row to thank my friends"></textarea>
+        </div>
+    </div>
+    <div class="my-clear"></div>
+</fieldset>

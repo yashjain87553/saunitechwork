@@ -1,0 +1,86 @@
+/*Style about baby*/
+input{background: none}
+.my-float-left{float: left}
+.my-clear{clear: both}
+.content{width: 40%}
+/*.my-content{width: 60%}*/
+.header_style h2{
+    border-bottom: 1px solid #ccc;
+    color: #7865b4;
+    font-family: Avenir-Roman;
+    font-size: 36px;
+    padding-bottom: 5px;
+    font-weight: normal;
+    margin-bottom: 5px
+}
+/*.required{float: right;color: red}*/
+.inline-block{display: inline-block}
+.infor{margin: 10px 0px}
+.infor .my-label{
+    display: inline-block;
+    width: 230px;
+
+}
+
+.my-float-left img{margin: 5px 15px;max-width: 500px}
+.btn_save{
+    display: block;
+    margin: 15px auto;
+    width: 150px;
+    margin: auto;
+    margin: 15px auto;
+
+}
+.img-back1{position: absolute;
+    left: 828px;
+    max-width: 500px;}
+.background-none{background: none}
+select,option{background: none}
+#map {
+    height: 200px;
+    width: 100%;
+}
+#description {
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+#infowindow-content .title {
+    font-weight: bold;
+}
+
+#infowindow-content {
+    display: none;
+}
+
+#map #infowindow-content {
+    display: inline;
+}
+
+.pac-card {
+    margin: 10px 10px 0 0;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    font-family: Roboto;
+}
+
+#pac-container {
+    padding-bottom: 12px;
+    margin-right: 12px;
+}
+
+.pac-controls {
+    display: inline-block;
+    padding: 5px 11px;
+}
+
+.pac-controls label {
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
+}

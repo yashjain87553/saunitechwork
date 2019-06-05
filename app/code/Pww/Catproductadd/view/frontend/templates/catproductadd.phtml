@@ -1,0 +1,10 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$product = $objectManager->get('Magento\Catalog\Model\Product');
+
+if($product->getIdBySku('24-UB02-00')) {
+    echo 'exit';    
+}
+else{
+    echo "not exist";
+}?>

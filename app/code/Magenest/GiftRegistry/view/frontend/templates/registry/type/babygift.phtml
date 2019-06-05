@@ -1,0 +1,66 @@
+<?php
+/**
+ * @var $block \Magenest\GiftRegistry\Block\Guest\ListSearch
+ */
+// @codingStandardsIgnoreFile
+$link = $block->getViewFileUrl('/');
+$baseUrl = $block->getBaseUrlEvent();
+?>
+<div class="container-baby-gift">
+    <div class="baby-gift-bacground" style="
+            background:
+            url('<?php echo $link?>/Magenest_GiftRegistry/images/show-gift/show-baby.png')
+    no-repeat;">
+        <div class="fix-baby-gift">
+            <div class="col-left">
+                <img src="<?php echo $block->getViewFileUrl('Magenest_GiftRegistry/images/babybanner.png')?>">
+                <div class="a-block">
+                    <h2><?php echo __('Start a Baby Registry')?></h2>
+                    <a href="<?php echo $block->getStartedUrl()?>" type="button" style="color: white;text-decoration: none;" class="btn-a">
+                        <?php if ($block->isLoggedIn() && $block->getGiftId()) echo __("Show My Baby Registry"); else echo __("Get Started")?>
+                    </a>
+                    <div>
+                        <?php if(!$block->isLoggedIn()):?>
+                            <span style="color: #767676"><?php echo __('Already have a registry?')?></span>
+                            <a id="redirect_login">Sign in</a>
+                        <?php endif;?>
+                    </div>
+                </div>
+                <div class="a-block">
+                    <h2><?php echo __('Find a Baby Gift')?></h2>
+                    <form id="event-registry-search" method="post" name="search_event" action="<?php echo $block->getUrlAction() ?>">
+                        <div class="group-fieldset">
+                            <fieldset  class="fieldset  ">
+
+                                <input name="form_key" type="hidden" value=""/>
+                                <input type="hidden" name="type" value="<?php echo $block->getEventType() ?>">
+                                <div class="field">
+                                    <label class="label"><?php echo ('Baby\'s Name') ?></label>
+                                    <div class="control">
+                                        <input type="text" class="input-text" title="Name'baby" id="event_bb" name="event_bb">
+                                    </div>
+                                    <label class="mage-error" id="event_fn-error" style="display: none; color:red;"><?php echo __('This is a required field.')?></label>
+                                </div>
+                                <div class="actions">
+                                    <button type="button" onclick="checkValue()" value=""><?php echo __('Search')?></button>
+                                </div>
+                            </fieldset >
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function checkValue(){
+        var event_fn = document.getElementById('event_bb').value;
+        if(event_fn.trim().length == 0){
+            document.getElementsByClassName('mage-error')[0].style.display = 'block';
+            document.getElementById('event_fn').style.border = 'solid 1px red';
+        }else {
+            document.getElementById("event-registry-search").submit();
+        }
+    }
+</script>

@@ -1,0 +1,105 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog sidebar categories template
+ *
+ * @var $block \Magefan\Blog\Block\Sidebar\Categories
+ */
+?>
+
+<?php $items = $this->getGroupedChilds(); ?>
+<?php if (count($items)) { ?>
+
+<?php 
+$realcount=0;
+$count=1;
+?>
+<div class="block block-vertnav clearfix hide-below-768">
+  <div class="block-title">
+    <strong>
+      <span> Blog Categories
+      </span>
+    </strong>
+  </div>
+  <div class="block-content">
+    <ul class="uaccordion uaccordion-style1 sideacco">
+      <?php foreach($items as $item){
+++$realcount;
+$data=$item->getData();
+if (count($data['parent_ids'])==0){
+$countinner=1;
+if($count==1)
+{?>
+      <li class="nav-item level0 nav-<?php echo $count;?> first parent">
+        <a href="<?php echo $item->getCategoryUrl();?>">
+          <span>
+            <?php echo $block->escapeHtml($item->getTitle());?>
+          </span>
+        </a>
+        <span class="opener">
+        </span>
+        <?php ++$count;}
+else{ ?>
+      <li class="nav-item level0 nav-<?php echo $count;?>  parent">
+        <a href="<?php echo $item->getCategoryUrl();?>">
+          <span>
+            <?php echo $block->escapeHtml($item->getTitle());?>
+          </span>
+        </a>
+        <span class="opener">
+        </span>
+        <?php ++$count; }
+}
+else{
+if($countinner==1)
+{?>
+        <ul class="level0 nav-submenu">
+          <li class="nav-item level1 nav-<?php echo $count;?>-<?php echo $countinner;?> first">
+            <a href="<?php echo $item->getCategoryUrl();?>">
+              <span>
+                <?php echo $block->escapeHtml($item->getTitle());?>
+              </span>
+            </a>
+          </li>
+          <?php
+++$countinner; }
+else{?>
+          <li class="nav-item level1 nav-<?php echo $count;?>-<?php echo $countinner;?>">
+            <a href="<?php echo $item->getCategoryUrl();?>">
+              <span>
+                <?php echo $block->escapeHtml($item->getTitle());?>
+              </span>
+            </a>
+          </li>
+          <?php ++$countinner;}
+}
+$subcount=0;
+$flag=false;
+foreach($items as $x)
+{ 
+++$subcount;
+if($subcount-1==$realcount){
+$data2=$x->getData();
+if(count($data2['parent_ids'])==0)
+{?>
+        </ul>
+      </li>
+      <?php
+   break;
+  }
+}
+}
+?>
+      <?php }?>
+    </ul>
+  </div>
+</div>
+<?php } ?>
+

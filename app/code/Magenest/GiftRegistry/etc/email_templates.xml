@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright Â© 2015 Magenest. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../Magento/Email/etc/email_templates.xsd">
+    <template id="giftregistry_email_template" label="Gift Registry Email Template" file="gift_registry_order_notification.html" type="html"
+              module="Magenest_GiftRegistry" area="frontend"/>
+    <template id="giftregistry_email_email_template_share_email" label="Share Email" file="gift_registry_share_email.html" type="html"
+              module="Magenest_GiftRegistry" area="frontend"/>
+</config>

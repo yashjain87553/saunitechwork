@@ -1,0 +1,11 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <head>
+        <css src="Magenest_GiftRegistry/css/registry/list_gift.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magenest\GiftRegistry\Block\Guest\ListSearch" name="search_type_gift" template="Magenest_GiftRegistry::guest/search_type_gift.phtml" cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>

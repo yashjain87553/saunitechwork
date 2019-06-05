@@ -1,0 +1,18 @@
+<?php
+// @codingStandardsIgnoreFile
+$link = $block->getViewFileUrl('/');
+?>
+<img class="img-back1" style="position: absolute;left: 800px;" src="<?php echo $block->getViewFileUrl('Magenest_GiftRegistry/images/new-gift/new-baby1.jpeg') ?>" alt="">
+<img class="img-back2" style="position: absolute;top: 500px;left: 800px;" src="<?php echo $block->getViewFileUrl('Magenest_GiftRegistry/images/new-gift/new-baby2.jpeg') ?>" alt="">
+<img class="img-back3" style="position: absolute;top: 900px;left: 800px;" src="<?php echo $block->getViewFileUrl('Magenest_GiftRegistry/images/new-gift/new-baby3.jpeg') ?>" alt="">
+<fieldset class="fieldset">
+    <h2 class="legend"><?php echo __("About baby")  ?> </h2>
+    <input type="hidden" name="type" value="<?php echo $type  ?>">
+    <div class="field required">
+        <div class="panel-heading label"><?php echo __('Baby\'s Name? ') ?></div>
+        <div class="panel-body">
+            <input type="text" data-validate="{required:true}" name="baby_name" value="" placeholder="Enter name of your baby"/>
+        </div>
+    </div>
+    <div class="my-clear"></div>
+</fieldset>

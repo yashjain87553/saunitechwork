@@ -1,0 +1,126 @@
+.gift_view{
+    display: inline-block;
+    position: relative;
+    /*top: -170px;*/
+    margin-bottom: 180px;
+}
+
+.gift_search_wrapper {
+    position: absolute;
+    top: 1px;
+    width: 34%;
+    border-radius: 5%;
+    right: 15px;
+}
+
+.gift_search_container{
+
+}
+
+.search_input {
+    display: inline-block;
+}
+
+div .list_registry {
+    text-align: center
+}
+
+.baby_gift{
+    width:40%;
+    display:inline-block;
+    height: 400px;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.gift_title{
+    text-align: center
+}
+
+.wedding_gift{
+    width:40%;
+    display:inline-block;
+    height: 400px;
+    margin-left: 2%;
+    margin-right:2%;
+}
+.gift_h2 {
+    color:black;
+}
+
+.btn_wrapper{
+    text-align: center;
+    margin-top: 3%;
+}
+
+.list_registry {
+    position: relative;
+    top:-200px;
+}
+
+.birthday_gift {
+    width:40%;
+    display:inline-block;
+    height: 400px;
+    margin-left: 2%;
+    margin-right:2%;
+}
+
+.newhouse_gift {
+    width:40%;
+    display:inline-block;
+    height: 400px;
+    margin-left: 2%;
+    margin-right:2%;
+}
+
+.all_gift_title{
+    text-align: center;
+    margin-top: 2%;
+    position: relative;
+    top:-180px;
+}
+
+.each_gift{
+    width:40%;
+    display:inline-block;
+    margin-left: 2%;
+    margin-right:2%;
+}
+
+.data-grid-th {
+    background-color: #514943;
+    border: .1rem solid #8a837f;
+    font-weight: 600;
+    text-align: left;
+    font-size: 1.3rem;
+    line-height: 1.36;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background-clip: padding-box;
+    color: #fff;
+    padding: 2px 5px;
+    position: relative;
+    vertical-align: middle;
+    color: #F0F0EE;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style: normal;
+}
+.data-grid-tr-no-data {
+    text-align: center;
+    font-size: 1.3rem;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.36;
+    border: solid 1px #8a837f;
+}
+.col-title {
+    border-left: .1rem dashed #d6d6d6;
+    border-right: .1rem dashed #d6d6d6;
+    border-bottom: .1rem dashed #d6d6d6;
+    text-align: center;
+}
+.list-gift {
+    width:auto;
+}

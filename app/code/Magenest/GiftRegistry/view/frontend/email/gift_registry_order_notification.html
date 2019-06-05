@@ -1,0 +1,18 @@
+<!--
+/**
+ * Copyright © 2015 Magenest. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!--@subject Your gift from {{var giver_name}}  via {{var store.getFrontendName()}}  @-->
+
+{{template config_path="design/email/header_template"}}
+<hr>
+{{trans "Dear"}} {{var recipient_name}} <br/>
+{{trans "Your friend:"}} {{var giver_name}} has sent to you a gift. <br/>
+Product: {{var product_name}}<br/>
+Qty: {{var qty}}<br/>
+<img src="{{var image_url}}" style="width: 50%"><br/>
+{{trans "Thank you for registering gift registry in %store_name." store_name=$store.getFrontendName()}}
+<hr>
+{{template config_path="design/email/footer_template"}}

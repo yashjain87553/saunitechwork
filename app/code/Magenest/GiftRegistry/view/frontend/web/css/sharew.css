@@ -1,0 +1,58 @@
+#share_email_div{
+    border-radius: 5px;
+    padding: 40px 40px 0px 40px;
+    border: solid 2px #8F8F8F;
+    display: none;
+    /*background-color: #F0F0F0;*/
+    box-shadow: 10px 10px 5px grey;
+}
+#share_via_email_form{
+
+}
+.submit_btn{
+    border: 1px solid #ccc;
+    color: #333;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    margin: 0;
+    padding: 7px 15px;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+.back_btn{
+    border: 1px solid #ccc;
+    color: #333;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    margin: 0;
+    padding: 7px 15px;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+.list_btn{
+    text-align: center;
+    padding: 20px;
+}
+.email_label {
+    font-size: 25px;
+}
+.note{
+    font-size: 12px;
+}
+.form-field{
+    padding: 10px;
+}
+.head_div{
+    text-align: center  ;
+}
+.giftregistry-share{
+    /*display: none;*/
+}

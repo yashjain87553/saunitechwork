@@ -1,0 +1,215 @@
+.homeside {
+    margin: 0;
+    margin-top: 11px;
+}
+.footer .heading {
+    font-size: 17px !important;
+    text-transform: uppercase;
+}
+.heading.category_header {
+        background-color: #ed9268;
+        color: #ffffff;
+        font-size: 19px;
+        margin: 0;
+        padding: 12px 0;
+        text-align: center;
+        text-transform: uppercase;
+    }
+.cate_list_side ul li {
+    padding: 10px 0 !important;
+}
+.cate_list_side {
+        border-bottom: 1px solid #d2d2d2;
+        border-left: 1px solid #d2d2d2;
+        border-right: 1px solid #d2d2d2;
+        margin: -1px;
+    }
+    .cate_list_side ul li {
+        border-bottom: 1px solid #D2D2D2;
+        list-style: inside disc;
+        margin: 0 26px 0 0;
+        padding: 16px 0 14px;
+    }
+    .cate_list_side ul li:last-child {
+        border-bottom:0px;
+    }
+    .category_side a {
+        font-size: 14px;
+        font-weight: 400;
+    }
+ .disc.category_side {
+    height: 285px;
+    overflow-y: scroll;
+}
+.beauty_buz {
+    
+    clear: both;
+    position: relative;
+    border: 1px solid #d7d7d7;
+    box-sizing: border-box;
+    box-shadow: 0 0 2px #d7d7d7;
+    top: 8px;
+    margin: 0 0 5% 0;
+}
+.beauty_buz .beauty_overlay {
+    background: rgba(0,0,0,.80);
+    padding: 7px 6px 3px 8px;
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    color: #fff;
+    
+}
+.beauty_buz .beauty_overlay h2 a {
+    color: #ffffff;
+    font-size: 22px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+    
+    .beauty_buz .beauty_overlay .more_btn {
+    text-align: center;
+}
+    .beauty_buz .beauty_overlay .more_btn a {
+    display: inline-block;
+    padding: 5px 20px;
+    color: #ea8f68;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #000;
+}
+.beauty_buz > p > img {
+    margin: 3px !important;
+    width: 97.7%;
+}
+
+.beauty_overlay > p {
+    font-size: 12px;
+}
+.beauty_overlay > h2 {
+    margin: 0 0 13px 0;
+}
+    
+    .beauty_overlay > h2 {
+    margin: 0 0 13px 0;
+}
+
+.home_tabproduct {
+    margin-right: 0 !important;
+    width: 76% !important;
+    margin-top: 15px;
+}
+ul.tabs{
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+        ul.tabs li {
+            background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+            color: #d2d2d2;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 17px;
+            font-weight: 600;
+            padding: 10px 40px;
+        }
+
+        ul.tabs li.current{
+            background: #ededed;
+            color: #222;
+            border-bottom: 1px solid;
+        }
+.tab-link {
+    padding: 0 !important;
+    font-size: 20px !important;
+    margin: 0 48px 0 32px;
+    background: unset !important;
+}
+
+.tab-content.current{
+            display: inherit;
+        }
+
+.tab-content {
+    padding: 0px !important;
+}
+ .tab-content{
+            display: none;
+            padding: 15px;
+        }
+
+ .h_view_more-1 > a {
+    float: right;
+    margin: -23px 0 40px;
+    font-weight: 600;
+}
+.header-top-container {
+    background: #000000 none repeat scroll 0 0;
+    color: #ffffff;
+}
+.main.container {
+    padding-top: 0px !important;
+    }
+.today_wrap {
+    margin-left :2px !important;
+    width:98.3% !important;
+    margin-top:0px !important;
+    margin-right:0px !important;
+    margin-bottom:0px !important;
+}
+.welcome{
+    color:#ed9268 !important;
+}
+.today_wrap {
+    background: #f8f8f8 none repeat scroll 0 0;
+    padding: 10px 0 10px 10px;
+}
+
+.search-term-head {
+    color: #28d2ed;
+    font-size: 17px;
+    font-weight: 500;
+    margin: 0 0 0 0;
+}
+
+.today_wrap {
+    background: #f8f8f8 none repeat scroll 0 0;
+    margin: -22px 0 0;
+    padding: 10px;
+}
+
+
+.today_wrap.grid12-12 li {
+    float: left;
+    margin: 0;
+}
+
+.today_wrap.grid12-12 > ul {
+    display: block;
+    float: left;
+    margin: 2px 0;
+}   
+
+.today_wrap.grid12-12 li::after {
+    content: unset !important;
+}
+
+.today_wrap.grid12-12 li:last-child::after {
+    content: unset;
+}
+.searchsuite-autocomplete{
+    left :0px !important;
+    width: 100% !important;
+}
+.header-primary a:hover{color:#ed9268!important;}
+
+@media only screen and (max-width: 764px) {
+    .foo-color{
+        color:#333 !important;
+    }
+    #popup > .title > a {
+        top:10px;
+    }
+    }

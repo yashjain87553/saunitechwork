@@ -1,0 +1,46 @@
+<?php
+$categoriesLevel0 = $this->getRootCategories();
+
+ if($categoriesLevel0) {
+    
+
+    foreach ($categoriesLevel0 as $categoryLevel0) { 
+        echo "Default Category/--".$categoryLevel0->getName()."--";
+        echo "<br>";
+
+        
+        $categoriesLevel1 = $this->getSubCategories($categoryLevel0);
+
+        if ($categoriesLevel1) {
+
+
+            foreach ($categoriesLevel1 as $subCategoryLevel1) {
+
+                echo   "Default Category/--".$categoryLevel0->getName()."--/--".$subCategoryLevel1->getName()."--";
+                echo "<br>";
+
+                $categoriesLevel2 = $this->getSubCategories($subCategoryLevel1);
+
+                if ($categoriesLevel2) {
+                    foreach ($categoriesLevel2 as $subCategoryLevel2) {
+                        echo  "Default Category/--".$categoryLevel0->getName()."--/--".$subCategoryLevel1->getName()."--/--".$subCategoryLevel2->getName()."--";
+                        echo "<br>";
+                    }
+
+                    
+                }
+
+                
+            }
+
+           
+        }
+
+        
+    }
+
+    
+}
+?>
+
+

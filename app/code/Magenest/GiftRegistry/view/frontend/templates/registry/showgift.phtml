@@ -1,0 +1,30 @@
+<?php
+    /**
+     * @var $block \Magenest\GiftRegistry\Block\Registry\ShowGift
+     */
+// @codingStandardsIgnoreFile
+    $eventType = $block->getEventType();
+    $registryId = $block->getGiftId();
+    include ($block->getTemplateFile('Magenest_GiftRegistry::registry/type/'.$eventType.'.phtml'));
+?>
+<script type="text/javascript">
+    require([
+        'jquery'
+    ], function($){
+        $('#redirect_login').click(function () {
+            $.ajax ({
+                type : "POST",
+                url : "<?php echo $block->getUrl("giftregistrys/index/registry")?>?isAjax=true",
+                showLoader : true,
+                data : {
+                    request : 'registry_login',
+                    type : '<?php echo $eventType?>',
+                    registryId : '<?php echo $registryId?>'
+                },
+                success : function () {
+                    window.location.href = "<?php echo $block->getUrl('customer/account/login')?>";
+                }
+            })
+        });
+    });
+</script>

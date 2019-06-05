@@ -1,0 +1,90 @@
+<?php
+/**
+ * @var $block Magenest\GiftRegistry\Block\Registry\ListGift
+ */
+// @codingStandardsIgnoreFile
+$link = $block->getViewFileUrl('/');
+$baseUrl = $block->getBaseUrlEvent();
+$listEvent = $block->getListEvent();
+?>
+<div class="gift_view">
+    <div class="gift_search_wrapper">
+        <h2 class="gift_h2"><?php echo __('Find a registry')?></h2>
+        <div class="gift_search_container">
+            <form id="gift_search_form" data-mage-init='{"validation":{}}' class="gift_search_form" method="POST" action="<?php echo $block->getListSearchUrl() ?>">
+                <input name="form_key" type="hidden" value="<?php /* @escapeNotVerified */ echo $block->getFormKey() ?>"/>
+                <div class="select-type">
+                    <select id="type-selected" name="type-selected" class="list-gift" title="Select Event Type">
+                        <option selected value="*"><?php echo __("All Type")?></option>
+                        <?php foreach ($listEvent as $event):?>
+                            <option value="<?php echo $event->getEventType()?>"><?php echo $event->getEventTitle()?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <select id="filter-selected" name="filter-selected" class="list-gift" title="Select Filter">
+                        <option id="filter-title" value="1"><?php echo __("Filter By Title")?></option>
+                        <option id="filter-name" selected value="2"><?php echo __("Filter By Name")?></option>
+                    </select>
+                </div>
+                <div id="search-name-wrapper" class="search-name-wrapper">
+                    <div class="field">
+                        <input id="event_fn" name="first-name" class="search_input" data-validate="{required:true}" type="text" placeholder="First Name">
+                    </div>
+                    <div class="field">
+                        <input id="event_ln" name="last-name" class="search_input" data-validate="{required:true}" type="text" placeholder="Last Name">
+                    </div>
+                </div>
+                <div id="search-title-wrapper" class="search-title-wrapper" hidden>
+                    <div class="field">
+                        <input id="title" name="title" class="search_input" data-validate="{required:true}" type="text" placeholder="Title">
+                    </div>
+                </div>
+                <div class="btn_wrapper">
+                    <button type="button" id="search_registry_submit_btn"><?php echo __('Search')?></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <img src="<?php echo $link.'/Magenest_GiftRegistry/images/giftview.jpg'?>">
+</div>
+<div class="all_gift_title"><h1><?php echo __('All registry you need')?></h1></div>
+<div class="list_registry" >
+    <?php foreach ($listEvent as $event):?>
+        <?php $eventType = $event->getData('event_type')?>
+        <?php if($event->getData('status') == 1 && ($eventType =='babygift' || $eventType == 'weddinggift' || $eventType == 'birthdaygift' || $eventType == 'christmasgift')):?>
+            <span class="each_gift">
+                <span class="gift_title">
+                    <h2><?php echo $event->getData('event_title');?></h2>
+                </span>
+                <a href="<?php echo $block->getGiftUrl($event->getData('event_type'))?>">
+                    <img src="<?php echo $link.'/Magenest_GiftRegistry/images/'.$event->getData('event_type').'.jpg'?>" style="width: 100%;height: 100%;">
+                </a>
+            </span>
+        <?php endif;?>
+    <?php endforeach; ?>
+</div>
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/confirm',
+        "Magento_Ui/js/modal/modal",
+        'Magenest_GiftRegistry/js/owl.carousel',
+        'Magenest_GiftRegistry/js/addToCart'
+    ],function ($) {
+        'use strict';
+
+        $("#filter-selected").change(
+            function () {
+                if(this.value == 1){
+                    $("#search-name-wrapper").hide();
+                    $("#search-title-wrapper").show();
+                }else {
+                    $("#search-name-wrapper").show();
+                    $("#search-title-wrapper").hide();
+                }
+            }
+        );
+        $('#search_registry_submit_btn').click(function () {
+            $('#gift_search_form').submit();
+        });
+    });
+</script>

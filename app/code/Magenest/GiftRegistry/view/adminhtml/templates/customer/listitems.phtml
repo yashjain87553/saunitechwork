@@ -1,0 +1,70 @@
+<?php
+// @codingStandardsIgnoreFile
+$_items = $block->getListItems();
+//print_r($lists);
+?>
+<?php if(count($_items)): ?>
+<div class="table-wrapper downloadable-products">
+            <table class="data-table cart-table" id="registry-list-table">
+                <thead>
+                    <tr class="first last">
+                        <th scope="col" class="col title"><?php echo __('ID') ?></th>
+                        <th scope="col" class="col title"><?php echo __('Product ID') ?></th>
+                        <th scope="col" class="col title"><?php echo __('Product Name') ?></th>
+                        <th scope="col" class="col title"><?php echo __('Price') ?></th>
+                        <th scope="col" class="col title"><?php echo __('Description') ?></th>
+                        <th scope="col" class="col title"><?php echo __('Would Love') ?></th>
+                        <th scope="col" class="col title"><?php echo __('Purchased') ?></th>
+                        <th scope="col" class="col title"><?php echo __('Action') ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($_items as $_item):?>
+
+                        <tr>
+                            <td data-th="<?php echo $block->escapeHtml(__('ID')) ?>" class="col title">
+
+                            <?php echo $_item['gift_item_id'] ?>
+
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Product ID')) ?>" class="col title">
+                            <?php echo $_item['product_id'] ?>
+
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Product Name')) ?>" class="col title">
+                            <?php echo $block->getInfoProduct($_item['product_id'])->getName() ?>
+
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Price')) ?>" class="col title">
+                            <?php
+                            $price = $block->getInfoProduct($_item['product_id'])->getFinalPrice();
+                            echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($price);
+                            ?>
+
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Description')) ?>" class="col title">
+                            <?php echo $_item['note'] ?>
+
+                        </td>
+
+                        <td data-th="<?php echo $block->escapeHtml(__('Would Love')) ?>" class="col title">
+                            <?php echo $_item['qty'] ?>
+                        </td>
+
+                        <td data-th="<?php echo $block->escapeHtml(__('Purchase')) ?>" class="col title">
+                            <?php echo $_item['received_qty'] ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Action')) ?>" class="col actions">
+                            <a href="<?php  echo $block->getViewItem($_item['product_id']) ?>" class="action view">
+                                <span><?php  echo __('View') ?></span>
+                            </a>
+                        </td>
+                    <?php endforeach;  ?>
+                </tbody>
+
+            </table>
+</div>
+</form>
+<?php else: ?>
+    <div class="message info empty"><span><?php echo __('There is no item in the gift registry'); ?></span></div>
+<?php endif; ?>

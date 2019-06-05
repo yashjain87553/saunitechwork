@@ -1,0 +1,105 @@
+<?php
+      $cat_id=121;
+      $type="new-arrivals";
+      $act="current";
+      $base_url=$block->getBaseUrl();
+      $mediaUrl = $block->getBaseUrl()."pub/media/";
+?>
+<?php if(isset($_GET['type']) && !empty($_GET['type']))
+{
+    $type= $_GET['type'];
+    if($type=="new-arrivals")
+    {
+        $cat_id=121;
+    }
+    else if($type=="best-sellers")
+    {
+        $cat_id=122;
+    }
+    else if($type=="editors-picks")
+    {
+        $cat_id=123;
+    }
+    else if($type=="sale")
+    {
+        $cat_id=124;
+    }
+    else{
+        $cat_id=121;
+    }
+}
+?>
+<p></p>
+<div class="clearer"></div>
+<p></p>
+<div class="grid12-3 homeside">
+    <div class="grid12-12">
+        <h6 class="block-title heading category_header grid12-12">Other Ways to Shop</h6>
+        <div class="block-content cate_list_side grid12-12">
+            <ul class="disc category_side">
+                <li><a href="fragrance-cologne/women.html">Women</a></li>
+                <li><a href="haircare.html">Haircare Tools</a></li>
+                <li><a href="skincare.html">Skincare Kit</a></li>
+                <li><a href="skincare/bath-body.html">Bath &amp; Body</a></li>
+                <li><a href="haircare/shampoo.html">Shampoo</a></li>
+                <li><a href="great-gift-ideas.html">GiftSet</a></li>
+                <li><a href="cosmetics.html">Cosmetic</a></li>
+                <li><a href="candles.html">Candles</a></li>
+                <li><a href="sunglasses.html">Sunglasses</a></li>
+            </ul>
+        </div>
+        <div class="beauty_buz">
+            <p><img class="lazy" src="<?php echo $mediaUrl?>Loader.gif" data-original="<?php echo $block->getViewFileUrl('images/z1.jpg');?>"  alt="Beauty Buzz" /></p>
+            <div class="beauty_overlay">
+                <h2><a href="cosmetics.html">The Beauty Buzz</a></h2>
+                <p>Are you ready for fall? Fall brings out some amazing new looks in beauty and fashion. 2019 is all about being comfortable and sexy. Combining elements of nature into your wardrobe will definitely help you make a fashion inspired statement, proving you can be daring and risk taking.</p>
+                <div class="more_btn"><a title="The Beauty Buzz" href="cosmetics.html" target="_self"> <span class="more">More &rsaquo;</span> </a></div>
+            </div>
+        </div>
+    </div>
+</div>
+ <div class="my_product">
+<div class="grid12-9 home_tabproduct">
+<ul class="tabs">
+<li class="tab-link <?php if($cat_id==121) echo $act;?>" ><a href="<?php echo $block->getBaseUrl().'?type=new-arrivals'?>">NEW ARRIVALS</a></li>
+<li class="tab-link <?php if($cat_id==122) echo $act;?>" ><a href="<?php echo $block->getBaseUrl().'?type=best-sellers'?>">BEST SELLERS</a></li>
+<li class="tab-link <?php if($cat_id==123) echo $act;?>" ><a  href="<?php echo $block->getBaseUrl().'?type=editors-picks'?>">EDITOR’S PICKS</a></li>
+<li class="tab-link <?php if($cat_id==124) echo $act;?>" ><a  href="<?php echo $block->getBaseUrl().'?type=sale'?>">SALE</a></li>
+</ul>
+<br>
+<div>
+<?php echo $block->getLayout()->createBlock('Infortis\Base\Block\Product\ProductList\Featured')->setAttr(1)->setCategoryId($cat_id)->setProductCount(10)->setBreakpoints("[0, 1], [320, 2], [480, 3], [768, 4], [992, 5], [1200, 6]")->setCentered(1)->setPagination(1)->setHideButton(0)->setBlockName($type)->setTemplate('Magento_Catalog::product/list.phtml')->toHtml();?>
+</div>
+</div>
+</div>
+<div class="clearer"></div>
+<div class="grid-container page-banners tabfootcat">
+    <div class="grid12-4 no-left-gutter banner"><img class="lazy" src="<?php echo $mediaUrl?>Loader.gif"
+    data-original="<?php echo $block->getViewFileUrl('images/7.jpg');?>" alt="Bags" width="368" height="305" /></div>
+    <div class="grid12-4">
+        <div class="feature feature-icon-hover indent first">
+            <span class="ic ic-char ib" style="background-color: #ddd;">1</span>
+            <h4>Skincare</h4>
+            <p>Your skin reflects your health. It's your body's canvas and one of its most valuable assets. It's also the only skin you'll ever get, so your daily habits mean everything.</p>
+        </div>
+        <div class="feature feature-icon-hover indent">
+            <span class="ic ic-char ib" style="background-color: #ddd;">2</span>
+            <h4>Jewelry</h4>
+            <p>Whether fancy or costume, nothing can add oomph to your wardrobe like jewelry. Here are our tips for making sure your bling always looks its best.</p>
+        </div>
+        <div class="feature feature-icon-hover indent last">
+            <span class="ic ic-char ib" style="background-color: #ddd;">3</span>
+            <h4>Haircare</h4>
+            <p>It seems like every day there's a new advancement in hair care and treatment, but which ones work best and are worth the cost and effort? See what experts say about the latest options for your hair.</p>
+        </div>
+    </div>
+    <div class="grid12-4 no-right-gutter hide-below-768">
+        <div class="page-banners grid-container-spaced">
+            <div class="grid12-12 no-gutter banner fade-on-hover ipad_mobile1"><a href="skincare.html"> <img class="lazy" src="<?php echo $mediaUrl?>Loader.gif" data-original="<?php echo $block->getViewFileUrl('images/4.jpg');?>"  alt="Skincare" width="369" height="145" /> </a></div>
+            <div class="grid12-6 no-left-gutter banner fade-on-hover ipad_mobile2"><a href="sale.html"> <img  class="lazy" src="<?php echo $mediaUrl?>Loader.gif" data-original="<?php echo $block->getViewFileUrl('images/5.jpg');?>" alt="Jewelry" width="181" height="146" /> </a></div>
+            <div class="grid12-6 no-right-gutter banner fade-on-hover ipad_mobile3"><a href="haircare.html"> <img  class="lazy" src="<?php echo $mediaUrl?>Loader.gif" data-original="<?php echo $block->getViewFileUrl('images/6.jpg');?>" alt="Haircare" width="181" height="146" /> </a></div>
+        </div>
+    </div>
+</div>
+<p>
+ 

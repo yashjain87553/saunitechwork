@@ -1,0 +1,24 @@
+<?php
+// @codingStandardsIgnoreFile
+$link = $block->getViewFileUrl('/');
+?>
+<img class="img-back1" style="position: absolute;left: 800px;" src="<?php echo $block->getViewFileUrl('Magenest_GiftRegistry/images/new-gift/new-wedding1.jpeg') ?>" alt="">
+<img class="img-back2" style="position: absolute;top: 500px;left: 800px;" src="<?php echo $block->getViewFileUrl('Magenest_GiftRegistry/images/new-gift/new-wedding2.jpeg') ?>" alt="">
+<img class="img-back3" style="position: absolute;top: 910px;left: 800px;" src="<?php echo $block->getViewFileUrl('Magenest_GiftRegistry/images/new-gift/new-wedding3.jpeg') ?>" alt="">
+<fieldset class="fieldset">
+    <h2 class="legend"><?php echo __("About You")  ?> </h2>
+    <input type="hidden" name="type" value="<?php echo $type  ?>">
+    <div class="field required">
+        <div class="panel-heading label"><?php echo __('Your Name? ') ?></div>
+        <div class="panel-body">
+            <input type="text" data-validate="{required:true}" name="husband_name" value="" placeholder="Enter your name"/>
+        </div>
+    </div>
+    <div class="field required">
+        <div class="panel-heading label"><?php echo __('Your Partner\'s Name? ') ?></div>
+        <div class="panel-body">
+            <input type="text" data-validate="{required:true}" name="wife_name" value="" placeholder="Enter  your partner's name"/>
+        </div>
+    </div>
+    <div class="my-clear"></div>
+</fieldset>

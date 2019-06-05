@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magenest. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Cron/etc/crontab.xsd">
+    <group id="index">
+        <job name="expired_gift_daily" instance="Magenest\GiftRegistry\Model\Cron" method="updateExpiredGift">
+            <schedule>30 2 * * *</schedule>
+        </job>
+    </group>
+</config>

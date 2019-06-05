@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magenest. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_item_save_after">
+        <observer name="giftregistry_observer_order_item" instance="Magenest\GiftRegistry\Observer\Order\Item"/>
+    </event>
+    <!--<event name="sales_order_item_save_after">-->
+        <!--<observer name="giftregistry_observer_cancel_order_item" instance="Magenest\GiftRegistry\Observer\Order\Item"/>-->
+    <!--</event>-->
+    <!--<event name="sales_order_creditmemo_save_after">-->
+        <!--<observer name="refund_giftregistry" instance="Magenest\GiftRegistry\Observer\Order\Creditmemo" />-->
+    <!--</event>-->
+    <event name="gift_registry_save_commit_after">
+        <observer name="save_update_time" instance="Magenest\GiftRegistry\Observer\GiftRegistry\Save\UpdateTime" />
+    </event>
+    <event name="sales_order_place_before">
+        <observer name="validate_expired_event" instance="Magenest\GiftRegistry\Observer\Order\ValidateCheckout"/>
+    </event>
+    <!--<event name="catalog_product_type_prepare_full_options">-->
+        <!--<observer name="giftregistry_observer_cart_add" instance="Magenest\GiftRegistry\Observer\Cart\Add" />-->
+    <!--</event>-->
+</config>

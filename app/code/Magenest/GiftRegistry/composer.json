@@ -1,0 +1,20 @@
+{
+  "name": "magenest/module-gift-registry",
+  "description": "Gift Registry extension by Magenest",
+  "type": "magento2-module",
+  "version": "102.3.0",
+  "license": [
+    "proprietary"
+  ],
+  "require": {
+    "magenest/core": "*"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Magenest\\GiftRegistry\\": ""
+    }
+  }
+}

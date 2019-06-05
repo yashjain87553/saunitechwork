@@ -1,0 +1,15 @@
+<?xml	version="1.0"?>
+<config	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <giftregistry>
+            <version_config>
+                <version>2</version>
+            </version_config>
+            <email>
+                <sender>general</sender>
+                <email_template_share_email>giftregistry_email_email_template_share_email</email_template_share_email>
+                <template>giftregistry_email_template</template>
+            </email>
+        </giftregistry>
+    </default>
+</config>
